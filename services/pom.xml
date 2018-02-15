@@ -19,10 +19,14 @@
   </properties>
 
   <dependencies>
+
     <dependency>
       <groupId>by.lk</groupId>
       <artifactId>model</artifactId>
       <version>${project.version}</version>
     </dependency>
+
   </dependencies>
+
+
 </project>
