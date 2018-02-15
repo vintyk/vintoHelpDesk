@@ -2,3 +2,6 @@
 .gitignore
 .idea/
 vintoHelpDesk.iml
+model/model.iml
+services/services.iml
+web/web.iml

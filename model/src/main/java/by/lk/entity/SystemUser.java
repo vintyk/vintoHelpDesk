@@ -1,6 +1,5 @@
 package by.lk.entity;
 
-<<<<<<< HEAD
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,15 +9,10 @@ import org.hibernate.validator.constraints.NotEmpty;
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
-=======
-import javax.persistence.Entity;
-import javax.persistence.*;
->>>>>>> 2 базовых класса
 
 
 @Entity
 @Table(name = "system_user")
-<<<<<<< HEAD
 @NoArgsConstructor
 @ToString
 @Getter
@@ -38,12 +32,12 @@ public class SystemUser extends BaseEntity {
     @Column(name = "password", nullable = false)
     private String passwordUser;
 
+    @JoinTable(name = "users_privileges",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "privilege_id"))
+    @ManyToMany
+    private Set<Privilege> privilege = new HashSet<>();
 
-    @ManyToOne
-    @JoinColumn(name = "privilege_id")
-    private Privilege privilege;
-=======
-public class SystemUser extends BaseEntity{
 
->>>>>>> 2 базовых класса
+
 }
