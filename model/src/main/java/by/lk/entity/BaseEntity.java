@@ -11,6 +11,7 @@ import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
 @ToString
+<<<<<<< HEAD
 public abstract class BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,4 +31,13 @@ public abstract class BaseEntity {
     public void setId(Long id) {
         this.id = id;
     }
+=======
+public class BaseEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Getter
+    @Setter
+    private Long id;
+
+>>>>>>> 2 базовых класса
 }
