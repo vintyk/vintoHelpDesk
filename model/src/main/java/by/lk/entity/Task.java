@@ -11,8 +11,8 @@ import javax.persistence.*;
 @Table(name = "task")
 @ToString
 @NoArgsConstructor
-@Setter
 @Getter
+@Setter
 public class Task extends BaseEntity {
     @Column(name = "name")
     private String name;
@@ -20,5 +20,4 @@ public class Task extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "type_of_job_id")
     private TypeOfJobs typeOfJobId;
-
 }
