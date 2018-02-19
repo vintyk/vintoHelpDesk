@@ -6,8 +6,6 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 public interface SystemUserRepository extends CrudRepository<SystemUser, Long> {
-//    @Query()
-//    void saveSystemUser(SystemUser systemUser);
 
     SystemUser findByEmail(String email);
 

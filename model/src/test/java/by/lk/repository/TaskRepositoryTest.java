@@ -1,4 +1,4 @@
-package by.lk.entity;
+package by.lk.repository;
 
 import by.lk.config.RootConfig;
 import by.lk.entity.Task;
