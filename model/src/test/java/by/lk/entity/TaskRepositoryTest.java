@@ -1,15 +1,18 @@
-package by.lk.repository;
+package by.lk.entity;
 
 import by.lk.config.RootConfig;
 import by.lk.entity.Task;
 
 
 import by.lk.entity.TypeOfJobs;
+import by.lk.repository.TaskRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.List;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = RootConfig.class)
@@ -28,11 +31,13 @@ public class TaskRepositoryTest {
         task.setTypeOfJobId(typeOfJobs);
         taskRepository.save(task);
 
-        Task myTask = taskRepository.findOne(1L);
-        System.out.println(myTask.getName());
-        System.out.println(myTask.getTypeOfJobId().getName());
+        Task myTask = taskRepository.findOne(2L);
+        System.out.println(myTask);
+    }
 
-
-
+    @Test
+    public void findByNameTest(){
+        final List<Task> tasks = taskRepository.findByName("Коля");
+        tasks.forEach(System.out::println);
     }
 }

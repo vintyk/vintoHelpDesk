@@ -19,7 +19,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final UserDetailsService userDetailsService;
 
     @Autowired
-    public SecurityConfig(UserDetailsService userDetailsService) {
+    public SecurityConfig(UserDetailsService userDetailsService)
+    {
         this.userDetailsService = userDetailsService;
     }
     @Autowired
@@ -38,20 +39,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/home", "/login", "/registration", "/resources/**")
+                .antMatchers("/login", "/registration", "/resources/**")
                 .permitAll()
-                .antMatchers("/admin")
-                .hasAuthority("ADMIN")
+                .antMatchers("/adminTool")
+                .hasAuthority("Admin")
                 .anyRequest()
                 .authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/login")
-                .defaultSuccessUrl("/HelpDesk", true)
+                .defaultSuccessUrl("/Project", true)
                 .and()
                 .logout()
                 .logoutUrl("/logout")
