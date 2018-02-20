@@ -1,19 +1,15 @@
 package by.lk.repository;
 
-import by.lk.config.RootConfig;
 import by.lk.entity.Privilege;
 import by.lk.entity.SystemUser;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringRunner;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNull;
 
-public class SystemUserRepositoryTest extends CommonTest{
+public class SystemUserRepositoryTest extends CommonTest {
 
     private SystemUser id;
 
@@ -34,7 +30,7 @@ public class SystemUserRepositoryTest extends CommonTest{
 
         id = systemUserRepository.save(systemUser);
         SystemUser userFromDb = systemUserRepository.findOne(id.getId());
-        Assert.assertEquals("Сравнение двух ID: ",id.getId(), userFromDb.getId());
+        Assert.assertEquals("Сравнение двух ID: ", id.getId(), userFromDb.getId());
     }
 
     @After
