@@ -1,22 +1,18 @@
 package by.lk.repository;
 
-import by.lk.config.RootConfig;
 import by.lk.entity.Task;
 import by.lk.entity.TypeOfJobs;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Arrays;
 import java.util.List;
 
-@RunWith(SpringRunner.class)
-@ContextConfiguration(classes = RootConfig.class)
-public class TaskRepositoryTest {
+import static org.junit.Assert.assertNull;
+
+public class TaskRepositoryTest extends CommonTest {
     private Task id;
 
     @Autowired
@@ -57,5 +53,7 @@ public class TaskRepositoryTest {
     @After
     public void finish() {
         taskRepository.delete(id);
+        final Task one = taskRepository.findOne(id.getId());
+        assertNull(one);
     }
 }

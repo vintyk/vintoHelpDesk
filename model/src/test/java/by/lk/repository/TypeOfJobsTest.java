@@ -1,18 +1,14 @@
 package by.lk.repository;
 
-import by.lk.config.RootConfig;
 import by.lk.entity.TypeOfJobs;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringRunner;
 
-@RunWith(SpringRunner.class)
-@ContextConfiguration(classes = RootConfig.class)
-public class TypeOfJobsTest {
+public class TypeOfJobsTest extends CommonTest {
     private TypeOfJobs id;
     @Autowired
     private TypeOfJobsRepository typeOfJobsRepository;
@@ -24,11 +20,13 @@ public class TypeOfJobsTest {
         id = typeOfJobsRepository.save(newTypeOfJobs);
 
         TypeOfJobs typeOfJobFromDb = typeOfJobsRepository.findOne(id.getId());
-        Assert.assertEquals(id.getId(), typeOfJobFromDb.getId());
+        assertEquals(id.getId(), typeOfJobFromDb.getId());
     }
 
     @After
     public void finish() {
         typeOfJobsRepository.delete(id);
+        final TypeOfJobs one = typeOfJobsRepository.findOne(id.getId());
+        assertNull(one);
     }
 }

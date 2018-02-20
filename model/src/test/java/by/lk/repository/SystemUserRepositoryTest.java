@@ -13,9 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.junit.Assert.*;
 
-@RunWith(SpringRunner.class)
-@ContextConfiguration(classes = RootConfig.class)
-public class SystemUserRepositoryTest {
+public class SystemUserRepositoryTest extends CommonTest{
 
     private SystemUser id;
 
@@ -36,11 +34,13 @@ public class SystemUserRepositoryTest {
 
         id = systemUserRepository.save(systemUser);
         SystemUser userFromDb = systemUserRepository.findOne(id.getId());
-        Assert.assertEquals(id.getId(), userFromDb.getId());
+        Assert.assertEquals("Сравнение двух ID: ",id.getId(), userFromDb.getId());
     }
 
     @After
     public void finish() {
         systemUserRepository.delete(id);
+        final SystemUser one = systemUserRepository.findOne(id.getId());
+        assertNull(one);
     }
 }

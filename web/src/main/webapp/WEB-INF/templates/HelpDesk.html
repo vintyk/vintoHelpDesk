@@ -1,6 +1,6 @@
 <!doctype html>
 <html class="no-js" lang="en" dir="ltr" xmlns:th="http://www.thymeleaf.org">
-<html class="no-js" lang="en" dir="ltr" xmlns:th="http://www.w3.org/1999/xhtml">
+<!--<html class="no-js" lang="en" dir="ltr" xmlns:th="http://www.w3.org/1999/xhtml">-->
 
 <head>
 
@@ -8,16 +8,275 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GAME Analitic</title>
-    <!--<style type="text/css">-->
-        <!--div {-->
-            <!--background: url(resources/pic/backgrnd3.jpg)-->
-        <!--}-->
-    <!--</style>-->
-    <link rel="stylesheet" href="/resources/css/foundation.css">
-    <link rel="stylesheet" href="/resources/css/app.css">
+    <style type="text/css">
+        div {
+            background: url(resources/pic/backgrnd3.jpg)
+        }
+    </style>
+    <link rel="stylesheet" href="resources/css/foundation.css">
+    <link rel="stylesheet" href="resources/css/app.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/motion-ui/1.1.1/motion-ui.min.css" />
 </head>
 <body>
-<h1> Привет!!! Это Техподдержка.</h1>
+
+<nav class="hover-underline-menu" data-menu-underline-from-center>
+    <ul class="dropdown menu" data-dropdown-menu>
+        <li><a href="/GameProject">Новости</a></li>
+        <li>
+            <a href="/GameView">Игры</a>
+            <ul class="menu vertical">
+                <li><a href="/GameView">Игры - базовая информация</a></li>
+                <li><a href="/gameInfo">Игры - общее описание</a></li>
+            </ul>
+        </li>
+        <li><a href="/publication_view">Публикации</a></li>
+        <li>
+            <a href="/adminTool">Администратор</a>
+            <ul class="menu vertical">
+                <li><a href="/adminTool">Создать вакансию</a></li>
+                <li><a href="/adminToolCreateGame">Создать Игру</a></li>
+                <li><a href="adminToolCreatePublication">Создать публикацию</a></li>
+            </ul>
+        </li>
+        <li><a href="/logout">Выход</a></li>
+    </ul>
+</nav>
+<div class="off-canvas-wrapper">
+    <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
+        <div class="off-canvas position-left" id="offCanvasLeft" data-off-canvas>
+        </div>
+        <div class="off-canvas position-right" id="offCanvasRight" data-off-canvas data-position="right">
+            <!-- right off-canvas markup -->
+        </div>
+        <div class="off-canvas-content" data-off-canvas-content>
+            <!-- page content -->
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="large-12 columns">
+        <h1 align="center">Добро пожаловать на сайт</h1>
+        <h1 align="center">любителей киберспорта</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="large-12 columns">
+        <div class="callout">
+            <h3>В центре внимания </h3>
+            <img src="resources/pic/003_wot.jpg">
+            <h5>Вышло обновление 9.19 для World of Tanks</h5>
+            <p>Вскоре после гранд-финала Wargaming League состоялся выход долгожданной версии 9.19 для World of Tanks.
+                Разработчики много и активно рассказали о нововведениях, ожидающих игроков, а теперь пришло время нам
+                самим их опробовать.</p>
+            <p>Самыми ожидаемыми, пожалуй, были ранговые бои, которые давно пора было добавить. Это новый режим, который
+                может быть многим знаком по другим соревновательным играм. В нём примут участие танки исключительно X
+                уровня, формат боёв 15 на 15. Союзники и противники будут подбираться по рангам. Сезоны длятся месяц,
+                первый начнётся 5 июня.</p>
+            <div class="row" data-equalizer data-equalize-on="medium" id="test-eq">
+                <div class="medium-4 columns">
+                    <div class="callout" data-equalizer-watch>
+                        <img src="resources/pic/005_wot.jpg">
+                    </div>
+                </div>
+                <div class="medium-4 columns">
+                    <div class="callout" data-equalizer-watch>
+                        <img src="resources/pic/004_wot.jpg">
+                    </div>
+                </div>
+                <div class="medium-4 columns">
+                    <div class="callout" data-equalizer-watch>
+                        <img src="resources/pic/006_wot.jpg">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="large-4 medium-4 columns">
+                    <p><a href="https://www.youtube.com/watch?time_continue=2&v=-M1LUR7kfkU">Обзор обновления</a><br/>Wargaming
+                        пообещала заняться улучшением советской техники. Но не ждите, что всё произойдёт мгновенно. В
+                        течение лета студия будет выпускать патчи, апающие танки СССР. Среди других нововведений
+                        обновления 9.19, у экипажа появилась женская озвучка. Вы сможете выбрать её в настройках звука.
+                        Была проведена работа над интерфейсом, во внутриигровом магазине появилась отдельная закладка с
+                        акциями. Ознакомиться с другими деталями вы можете в официальном патчноте.</p>
+                </div>
+                <div class="large-4 medium-4 columns">
+                    <p><a href="http://mmo13.ru/news/post-3716">Патч 9.18 для World of Tanks</a><br/>Патч улучшит
+                        матчмейкинг и изменит артиллерию. Разработчики обещают, что игроки больше на попадут в матч, где
+                        у противников нет ни одного танка такого же уровня. Все дело в том, что составы команд будут
+                        определяться по единому шаблону: 1-3 танка высокого уровня, 1-5 среднего и 7-13 низкого. А в
+                        одной команде сможет быть не больше трех САУ одновременно.</p>
+                </div>
+                <div class="large-4 medium-4 columns">
+                    <p><a href="http://mmo13.ru/news/post-3008">Игроки World of Tanks получат подарки</a><br/>Чтобы
+                        порадовать фанатов, разработчики решили сделать им подарки. Все владельцы Xbox 360, Xbox One и
+                        PlayStation 4 получат танк БТ-7A «Герой Расейняя». Он идёт в специальной раскраске. Акция
+                        действует до конца месяца, 28 февраля. Чтобы принять дар, достаточно провести один бой. Кроме
+                        того, до 26 февраля будет проходить необычное мероприятие. Игрокам нужно зарегистрироваться на
+                        специальной странице и выбрать там класс. Затем в зависимости от вашего выбора будет вестись
+                        учёт различных показателей. В конце будут выдавать награды.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="large-8 medium-8 columns">
+        <h5>Blizzard может работать над мобильным Warcraft</h5>
+        <!-- Grid Example -->
+
+        <div class="row">
+            <div class="large-12 columns">
+                <div class="primary callout">
+                    <p><strong>Blizzard Entertainment</strong> не скрывает, что видит потенциал в рынке мобильных игр.
+                        Пользователь NeoGAF под ником Nirolak обнаружил на сайте компании вакансию FX-художника,
+                        которому предстоит работать над не анонсированным проектом. Речь идет об игре для мобильных
+                        устройств, но её описание носит довольно общий характер.</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="large-6 medium-6 columns">
+                <div class="primary callout">
+                    <p>Однако среди требований к должности имеется интересный пункт: страсть к созданию изображений,
+                        синонимичных вселенной Warcraft. Это не гарантирует, что предстоящая мобильная игра
+                        действительно будет связана с Варкрафтом, но исключать такой вариант не стоит.</p>
+                </div>
+            </div>
+            <div class="large-6 medium-6 columns">
+                <div class="primary callout">
+                    <p>Внезапно на сайте Blizzard Появилась форма, которая косвенно признает существование нового
+                        проекта. Посетители нашего сайта могут ее заполнить, если хотят попытать счастья в компании
+                        Метелицы. Дерзайте! Мы отправим ваши данные прямо в отдел кадров BLIZZARD!</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="large-4 medium-4 small-4 columns">
+                <div class="primary callout">
+                    <p align="center">Вы Гейм-дизайнер?</p>
+                </div>
+            </div>
+            <div class="large-4 medium-4 small-4 columns">
+                <div class="primary callout">
+                    <p>Стаж больше 7 лет?</p>
+                </div>
+            </div>
+            <div class="large-4 medium-4 small-4 columns">
+                <div class="primary callout">
+                    <p align="center">Вы гений?</p>
+                </div>
+            </div>
+        </div>
+
+        <hr/>
+
+        <h5>Открытие программы в помощи трудоустройства</h5>
+        <img src="/resources/pic/0022_bliz.jpg">
+        <br>
+        <br>
+        <div class="row">
+            <div class="large-12 columns">
+                <label> Выберите компанию в которой хотели бы попробовать свои силы и открытую вакансию:</label>
+                <form th:action="@{/GameProject}" method="post" th:object="${jobVacancyDto}">
+                    <select th:field="*{vacancyId}">
+                        <option th:each="vacancies : ${vacancies}"
+                                th:value="${vacancies.id}"
+                                th:text="'Вакансия '+${vacancies.nameVacancy}+' в компании '+${vacancies.company.name}">
+                        </option>
+                    </select>
+                    <div class="row">
+                        <div class="large-4 medium-4 columns">
+                            <label th:for="nameUser">Имя</label>
+                            <input type="text" th:field="*{nameUser}" placeholder="John"/>
+                        </div>
+                        <div class="large-4 medium-4 columns">
+                            <label th:for="familyUser">Фамилия</label>
+                            <input type="text" th:field="*{familyUser}" placeholder="Dorian"><br>
+                        </div>
+                        <div class="large-4 medium-4 columns">
+                            <label th:for="email">E-mail</label>
+                            <input type="text" th:field="*{email}" placeholder="JonD@gmail"><br>
+                        </div>
+                        <div class="large-6 medium-6 columns">
+                            <label> Гендерная принадлежность </label>
+                        <div class="radio" th:each="gender : ${genders}">
+                            <label>
+                                <input type="radio" th:value="${gender}" th:field="*{gender}">
+                                <span th:text="#{${'gender.' + #strings.capitalize(#strings.toLowerCase(gender))}}"></span>
+                            </label>
+                        </div>
+                        </div>
+                        <div class="large-6 medium-6 columns">
+                        <label> Знание английского </label>
+                        <div class="radio" th:each="english : ${englishes}">
+                            <label>
+                                <input type="radio" th:value="${english}" th:field="*{english}">
+                                <span th:text="#{${'english.' + #strings.capitalize(#strings.toLowerCase(english))}}"></span>
+                            </label>
+                        </div>
+                        </div>
+                        <div class="large-12 columns">
+                            <label> Очень некоротко о себе.</label>
+                            <textarea placeholder="Кто азм есьм..." th:field="*{comment}"></textarea>
+                        </div>
+                        <button type="submit" class="expanded button">Отправить вакансию</button>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+
+    </div>
+
+    <div class="large-4 medium-4 columns">
+        <h5>Все вакансии Blizzard</h5>
+        <span class="warning label">Warning</span>
+        <div class="callout">
+            <h5>Создавай миры!</h5>
+
+            <img src="/resources/pic/0021_bliz.jpg">
+            <p>We’re on a quest: bring our dreams to life and craft the most epic entertainment experiences, ever.
+                Hard work, iteration and polish go into the Blizzard “secret recipe,” but the most important
+                ingredients come from talented people who share our vision. If that sounds like you, join us.</p>
+            <a href="http://eu.blizzard.com/ru-ru/" class="small button">Go to official Site</a>
+        </div>
+        <h5>Все вакансии Wargaming</h5>
+        <span class="warning label">Warning</span>
+        <div class="callout">
+            <h5>Пиши гейм-историю!</h5>
+
+            <img src="/resources/pic/001_war.jpg">
+            <p>Работа в Wargaming
+                Жизнь в Wargaming — калейдоскоп событий, эмоций и переживаний, связанных в одно целое. Наше
+                преимущество — в многообразии, искренней любви к работе и постоянном самосовершенствовании. Мы хотим
+                видеть в своих рядах таких же помешанных на результате. Присоединяйся!</p>
+            <a href="http://wargaming.com/ru/careers/" class="small button">Go to official Site</a>
+        </div>
+        <div class="callout">
+            <h5>Соискатель,</h5>
+
+            <img src="/resources/pic/people_soiskately.png">
+            <p>Присоединяйся!</p>
+<!--
+            <ul class="menu" data-smooth-scroll>
+			  <li><a href="#first">First Arrival</a></li>
+			  <li><a href="#second">Second Arrival</a></li>
+			  <li><a href="#third">Third Arrival</a></li>
+			</ul>
+-->
+			<select>
+                    <option th:each="jobs : ${jobs}" th:value="${jobs}" th:text="${jobs.nameUser}+' '+${jobs.familyUser}"></option>
+            </select>	
+<!--            <a href="http://wargaming.com/ru/careers/" class="small button">Go to official Site</a>-->
+            <p>Как это сделали они.</p>
+        </div>
+    </div>
 </div>
 
 <script src="/resources/js/vendor/jquery.js"></script>
