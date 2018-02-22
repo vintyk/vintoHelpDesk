@@ -1,21 +1,18 @@
 package by.lk.services;
 
+import by.lk.dto.SystemUserDto;
 import by.lk.entity.Privilege;
 import by.lk.entity.SystemUser;
 import by.lk.repository.SystemUserRepository;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by SystemUser on 20.06.2017.
@@ -32,25 +29,25 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public SystemUser findByEmail(String name) {
-        return systemUserRepository.findByEmail(name);
+    public Long saveUser(SystemUserDto systemUserDto) {
+
+        Privilege privilege = new Privilege();
+        privilege.setId(systemUserDto.getPrivilegeId());
+
+        SystemUser systemUser = new SystemUser();
+        systemUser.setNameUser(systemUserDto.getNameUser());
+        systemUser.setFamilyUser(systemUserDto.getFamilyUser());
+        systemUser.setPasswordUser(quickPasswordEncodingGenerator(systemUserDto.getPasswordUser()));
+        systemUser.setEmail(systemUserDto.getEmail());
+        systemUser.setPrivilege(privilege);
+
+        SystemUser userFromDb = systemUserRepository.save(systemUser);
+        return userFromDb.getId();
     }
 
     @Override
-    public void saveUser(
-            String nameUser,
-            String family,
-            String eMail,
-            String pass,
-            Privilege privilege
-            ) {
-        final SystemUser systemUser = new SystemUser();
-        systemUser.setNameUser(nameUser);
-        systemUser.setFamilyUser(family);
-        systemUser.setEmail(eMail);
-        systemUser.setPasswordUser(quickPasswordEncodingGenerator(pass));
-        systemUser.setPrivilege(privilege);
-        systemUserRepository.save(systemUser);
+    public SystemUser findByEmail(String name) {
+        return systemUserRepository.findByEmail(name);
     }
 
     @Override

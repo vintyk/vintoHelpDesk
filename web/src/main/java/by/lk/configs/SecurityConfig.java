@@ -40,7 +40,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
@@ -54,12 +53,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/login")
-                .defaultSuccessUrl("/Project", true)
+                .defaultSuccessUrl("/HelpDesk", true)
+                // указываем URL при неудачном логине
+                .failureUrl("/login?error")
                 .and()
                 .logout()
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/login")
                 .and()
+                // включаем защиту от CSRF атак
                 .csrf().disable();
 
         http.userDetailsService(userDetailsService);

@@ -2,6 +2,7 @@ package by.lk.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -18,9 +19,9 @@ import java.util.Properties;
  * Created by Vinty on 21.06.2017.
  */
 @Configuration
-@PropertySource("classpath:databaseTest.properties")
+@ComponentScan(basePackages = {"by.lk"})
 @EnableTransactionManagement
-@EnableJpaRepositories(basePackages = "by.lk")
+@PropertySource("classpath:database.properties")
 public class TestConfig {
 
     @Value("${jdbc.url}")

@@ -25,12 +25,12 @@ public class UserServiceTest extends BaseTest {
 //    }
 
     @Test
-    public void saveUserTest() {
+    public void saveUser() {
         SystemUserDto systemUserDto = new SystemUserDto();
         systemUserDto.setNameUser("Виталий");
         systemUserDto.setFamilyUser("Ушаков");
-        systemUserDto.setEmail("vinty@i.ua");
-        systemUserDto.setPasswordUser("1");
+        systemUserDto.setEmail("uv@ecp.by");
+        systemUserDto.setPasswordUser("qwerty12345");
         systemUserDto.setPrivilegeId(1L);
         Long userId = userService.saveUser(systemUserDto);
         System.out.println(userId);
