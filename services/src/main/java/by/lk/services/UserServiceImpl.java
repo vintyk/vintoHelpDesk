@@ -38,6 +38,7 @@ public class UserServiceImpl implements UserService {
         systemUser.setNameUser(systemUserDto.getNameUser());
         systemUser.setFamilyUser(systemUserDto.getFamilyUser());
         systemUser.setPasswordUser(quickPasswordEncodingGenerator(systemUserDto.getPasswordUser()));
+//        systemUser.setPasswordUser(systemUserDto.getPasswordUser());
         systemUser.setEmail(systemUserDto.getEmail());
         systemUser.setPrivilege(privilege);
 

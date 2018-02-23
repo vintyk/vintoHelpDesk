@@ -25,7 +25,7 @@ public class UserServiceTest extends BaseTest {
 //    }
 
     @Test
-    public void saveUser() {
+    public void saveUserTest() {
         SystemUserDto systemUserDto = new SystemUserDto();
         systemUserDto.setNameUser("Виталий");
         systemUserDto.setFamilyUser("Ушаков");
