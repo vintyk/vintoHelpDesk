@@ -8,6 +8,9 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import static org.junit.Assert.assertNull;
 
 public class SystemUserRepositoryTest extends CommonTest {
@@ -19,15 +22,17 @@ public class SystemUserRepositoryTest extends CommonTest {
 
     @Test
     public void findByEmailTest() {
+        Set<Privilege> privileges = new HashSet<>();
         Privilege privilege = new Privilege();
         privilege.setId(1L);
+        privileges.add(privilege);
 
         SystemUser systemUser = new SystemUser();
         systemUser.setNameUser("Виталий");
         systemUser.setFamilyUser("Ушаков");
         systemUser.setPasswordUser("1");
         systemUser.setEmail("v");
-        systemUser.setPrivilege(privilege);
+        systemUser.setPrivilege(privileges);
 
         id = systemUserRepository.save(systemUser);
         SystemUser userFromDb = systemUserRepository.findOne(id.getId());

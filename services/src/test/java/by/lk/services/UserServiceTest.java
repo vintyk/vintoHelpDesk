@@ -34,7 +34,7 @@ public class UserServiceTest extends BaseTest {
         systemUserDto.setPrivilegeId(1L);
         Long userId = userService.saveUser(systemUserDto);
         System.out.println(userId);
-//        systemUserRepository.delete(userId);
+        systemUserRepository.delete(userId);
     }
 }
 
