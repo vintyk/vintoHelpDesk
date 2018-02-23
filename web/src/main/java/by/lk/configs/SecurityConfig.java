@@ -19,8 +19,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final UserDetailsService userDetailsService;
 
     @Autowired
-    public SecurityConfig(UserDetailsService userDetailsService)
-    {
+    public SecurityConfig(UserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
     }
     @Autowired
@@ -39,14 +38,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/login", "/registration", "/resources/**")
+                .antMatchers("/login", "/registration", "/resources/**", "/HelpDesk")
                 .permitAll()
-                .antMatchers("/adminTool")
-                .hasAuthority("Admin")
+                .antMatchers("/admin")
+                .hasAuthority("ADMIN")
                 .anyRequest()
                 .authenticated()
                 .and()
@@ -54,14 +52,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/login")
                 .loginProcessingUrl("/login")
                 .defaultSuccessUrl("/HelpDesk", true)
-                // указываем URL при неудачном логине
-                .failureUrl("/login?error")
                 .and()
                 .logout()
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/login")
                 .and()
-                // включаем защиту от CSRF атак
                 .csrf().disable();
 
         http.userDetailsService(userDetailsService);

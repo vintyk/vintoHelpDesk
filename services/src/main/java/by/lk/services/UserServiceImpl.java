@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService {
         systemUser.setPasswordUser(quickPasswordEncodingGenerator(systemUserDto.getPasswordUser()));
         systemUser.setEmail(systemUserDto.getEmail());
         systemUser.setPrivilege(privilege);
-
+        System.out.println(quickPasswordEncodingGenerator("1"));
         SystemUser userFromDb = systemUserRepository.save(systemUser);
         return userFromDb.getId();
     }

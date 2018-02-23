@@ -26,7 +26,7 @@ public class SystemUserRepositoryTest extends CommonTest {
         systemUser.setNameUser("Виталий");
         systemUser.setFamilyUser("Ушаков");
         systemUser.setPasswordUser("1");
-        systemUser.setEmail("vinty@i.ua");
+        systemUser.setEmail("v");
         systemUser.setPrivilege(privilege);
 
         id = systemUserRepository.save(systemUser);

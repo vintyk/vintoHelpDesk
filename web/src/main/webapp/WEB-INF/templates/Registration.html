@@ -1,0 +1,63 @@
+<!doctype html>
+<html class="no-js" lang="en" dir="ltr" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registration</title>
+  <!--<style type="text/css">-->
+    <!--div {-->
+      <!--background: url(/resources/pic/backgrnd3.jpg)-->
+    <!--}-->
+  <!--</style>-->
+  <link rel="stylesheet" href="/resources/css/foundation.css">
+  <link rel="stylesheet" href="/resources/css/app.css">
+</head>
+<body>
+
+<div class="row">
+  <div class="large-12 columns">
+    <h1 align="center">Регистрация</h1>
+  </div>
+</div>
+<div class="row">
+  <div class="large-12 columns">
+    <div class="callout">
+      <h3>Заполните поля</h3>
+      <img src= "/resources/pic/registration.jpg">
+      <div class="row">
+        <form id="1" th:action="@{/registration}" method="post" th:object="${systemUsersDto}">
+            <div class="large-12 columns">
+              <span th:text="#{email_you_login.emaillogin}">ваш login</span>
+              <input type="text" th:field="*{email}" placeholder="JonD@gmail" required="required"><br>
+
+              <span th:text="#{password.mypassword}">password</span>
+              <input type="text" th:field="*{passwordUser}" placeholder="enter password" required="required"><br>
+            </div>
+            <div class="large-4 medium-4 columns">
+              <label th:for="nameUser">Имя</label>
+              <input type="text" th:field="*{nameUser}" placeholder="John"/>
+            </div>
+            <div class="large-4 medium-4 columns">
+              <label th:for="familyUser">Фамилия</label>
+              <input type="text" th:field="*{familyUser}" placeholder="Dorian"><br>
+            </div>
+            <div class="large-6 medium-6 columns">
+              </div>
+              <button type="submit" class="expanded button">Зарегистрировать</button><br>
+              <a class="expanded button" href="/login" th:text="#{login.enter}">Вход в систему</a>
+            </div>
+            <br/>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script src="/resources/js/vendor/jquery.js"></script>
+<script src="/resources/js/vendor/what-input.js"></script>
+<script src="/resources/js/vendor/foundation.js"></script>
+<script src="/resources/js/app.js"></script>
+</body>
+</html>
