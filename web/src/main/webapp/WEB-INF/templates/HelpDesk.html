@@ -27,12 +27,9 @@
             <!--<img src="/resources/pic/registration.jpg">-->
             <div class="medium-6 columns">
                 <form id="1" th:action="@{/helpdesk}" method="post" th:object="${taskDto}">
-                    <span th:text="#{HD.text}">text</span>
-                    <input type="text" th:field="*{email}" placeholder="JonDou1978@gmail.com" required="required">
-                    <button type="submit" th:text="#{login.registration}" class="success  expanded button">
-                        Зарегистрировать
+                    <input type="text" th:field="*{text}" th:placeholder="HD.text" required="required">
+                    <button type="submit" th:text="#{HD.}" class="success  expanded button">Зарегистрировать
                     </button>
-                    <a class="hollow expanded button" href="/login" th:text="#{login.enter}">Вход в систему</a>
                 </form>
             </div>
             <div class="medium-3 columns">

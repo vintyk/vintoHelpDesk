@@ -15,5 +15,5 @@ import javax.transaction.Transactional;
 @Transactional
 @ContextConfiguration(classes = TestConfig.class)
 @Commit
-public abstract class BaseTest {
+public abstract class CommonTest {
 }
