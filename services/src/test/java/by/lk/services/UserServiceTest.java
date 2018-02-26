@@ -29,12 +29,12 @@ public class UserServiceTest extends BaseTest {
         SystemUserDto systemUserDto = new SystemUserDto();
         systemUserDto.setNameUser("Виталий");
         systemUserDto.setFamilyUser("Ушаков");
-        systemUserDto.setEmail("vinty@i.ua");
+        systemUserDto.setEmail("v");
         systemUserDto.setPasswordUser("1");
         systemUserDto.setPrivilegeId(1L);
         Long userId = userService.saveUser(systemUserDto);
         System.out.println(userId);
-//        systemUserRepository.delete(userId);
+        systemUserRepository.delete(userId);
     }
 }
 

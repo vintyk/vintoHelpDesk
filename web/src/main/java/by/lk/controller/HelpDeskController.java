@@ -15,9 +15,4 @@ public class HelpDeskController {
     public String showHelpDesk() {
         return "HelpDesk";
     }
-
-    @PostMapping(path = "/HelpDesk")
-    public String tempJobVacancyDto(Model model) {
-        return "HelpDesk";
-    }
 }

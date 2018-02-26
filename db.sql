@@ -3,7 +3,7 @@
 -- Host: 127.0.0.1    Database: vintohelpdesk
 -- ------------------------------------------------------
 -- Server version	5.7.20-log
-USE vintohelpdesk;
+
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
@@ -26,7 +26,7 @@ CREATE TABLE `privileges` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -35,7 +35,7 @@ CREATE TABLE `privileges` (
 
 LOCK TABLES `privileges` WRITE;
 /*!40000 ALTER TABLE `privileges` DISABLE KEYS */;
-INSERT INTO `privileges` VALUES (1,'user'),(2,'admin');
+INSERT INTO `privileges` VALUES (1,'user'),(2,'admin'),(3,'operator');
 /*!40000 ALTER TABLE `privileges` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -52,11 +52,11 @@ CREATE TABLE `system_user` (
   `family` varchar(50) DEFAULT NULL,
   `e_mail` varchar(50) NOT NULL,
   `privilege_id` int(11) DEFAULT NULL,
-  `password` varchar(50) NOT NULL,
+  `password` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `system_user_privilege_id_fk` (`privilege_id`),
   CONSTRAINT `system_user_privilege_id_fk` FOREIGN KEY (`privilege_id`) REFERENCES `privileges` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -65,7 +65,7 @@ CREATE TABLE `system_user` (
 
 LOCK TABLES `system_user` WRITE;
 /*!40000 ALTER TABLE `system_user` DISABLE KEYS */;
-INSERT INTO `system_user` VALUES (1,'Виталий','Ушаков','vinty@i.ua',1,'1');
+INSERT INTO `system_user` VALUES (37,'Виталий','Ушаков','uv@ecp.by',NULL,'$2a$10$83pN6SlRrbU3rEgG8Tcb7.D.KHGVC2AD/C8z/KhvYPW91sjrPCVM2');
 /*!40000 ALTER TABLE `system_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -84,7 +84,7 @@ CREATE TABLE `task` (
   UNIQUE KEY `task_id_uindex` (`id`),
   KEY `task_type_of_jobs_id_fk` (`type_of_job_id`),
   CONSTRAINT `task_type_of_jobs_id_fk` FOREIGN KEY (`type_of_job_id`) REFERENCES `type_of_jobs` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -93,7 +93,7 @@ CREATE TABLE `task` (
 
 LOCK TABLES `task` WRITE;
 /*!40000 ALTER TABLE `task` DISABLE KEYS */;
-INSERT INTO `task` VALUES (2,'Коля',1),(19,'Коля',1),(20,'Коля',1),(21,'Коля',1),(22,'Коля',1),(23,'Коля',1),(24,'Коля',1),(25,'Коля',1),(26,'Коля',1),(27,'Коля',1);
+INSERT INTO `task` VALUES (2,'Коля',1);
 /*!40000 ALTER TABLE `task` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -108,7 +108,7 @@ CREATE TABLE `type_of_jobs` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -117,8 +117,35 @@ CREATE TABLE `type_of_jobs` (
 
 LOCK TABLES `type_of_jobs` WRITE;
 /*!40000 ALTER TABLE `type_of_jobs` DISABLE KEYS */;
-INSERT INTO `type_of_jobs` VALUES (1,'Наладка'),(2,'Починка принтеров'),(3,'Починка принтеров'),(4,'Починка принтеров'),(5,'Починка принтеров'),(6,'Починка принтеров');
+INSERT INTO `type_of_jobs` VALUES (1,'Наладка'),(2,'Починка принтеров');
 /*!40000 ALTER TABLE `type_of_jobs` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `users_privileges`
+--
+
+DROP TABLE IF EXISTS `users_privileges`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `users_privileges` (
+  `user_id` int(11) NOT NULL,
+  `privilege_id` int(11) NOT NULL,
+  PRIMARY KEY (`user_id`,`privilege_id`),
+  KEY `fk_users_privileges_privilege_id` (`privilege_id`),
+  CONSTRAINT `fk_users_privileges_privilege_id` FOREIGN KEY (`privilege_id`) REFERENCES `privileges` (`id`),
+  CONSTRAINT `fk_users_privileges_user_id` FOREIGN KEY (`user_id`) REFERENCES `system_user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `users_privileges`
+--
+
+LOCK TABLES `users_privileges` WRITE;
+/*!40000 ALTER TABLE `users_privileges` DISABLE KEYS */;
+INSERT INTO `users_privileges` VALUES (37,1);
+/*!40000 ALTER TABLE `users_privileges` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -130,4 +157,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-02-19 21:25:31
+-- Dump completed on 2018-02-26 10:02:08

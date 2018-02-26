@@ -1,7 +1,9 @@
 package by.lk.configs;
 
+import by.lk.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -14,6 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
+@ComponentScan("by.lk")
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final UserDetailsService userDetailsService;
@@ -22,6 +25,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public SecurityConfig(UserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
     }
+
     @Autowired
     public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService);
@@ -41,10 +45,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/home", "/login", "/registration", "/resources/**")
+                .antMatchers("/login", "/registration", "/resources/**", "/HelpDesk")
                 .permitAll()
-                .antMatchers("/admin")
-                .hasAuthority("ADMIN")
+                .antMatchers("/admin").hasAuthority("ADMIN")
                 .anyRequest()
                 .authenticated()
                 .and()
