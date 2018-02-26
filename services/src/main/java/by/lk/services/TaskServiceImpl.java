@@ -39,7 +39,7 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public Long saveTask(TaskDto taskDto) {
         TypeOfJobs typeOfJobs = new TypeOfJobs();
-        typeOfJobs.setId(taskDto.getId());
+        typeOfJobs.setId(taskDto.getTypeOfJobId());
 
         Task task = new Task();
         task.setName(taskDto.getName());
