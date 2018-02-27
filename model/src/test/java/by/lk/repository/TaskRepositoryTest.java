@@ -26,6 +26,7 @@ public class TaskRepositoryTest extends CommonTest {
         Task task = new Task();
         task.setName("Виталий");
         task.setTypeOfJobId(typeOfJobs);
+        task.setText("Это заявка в свободной форме.");
         id = taskRepository.save(task);
 
         Task myTask = taskRepository.findOne(id.getId());
@@ -42,11 +43,11 @@ public class TaskRepositoryTest extends CommonTest {
         Task task = new Task();
         task.setName(NAME);
         task.setTypeOfJobId(typeOfJobs);
+        task.setText("Это заявка в свободной форме 2.");
         id = taskRepository.save(task);
 
         List<Task> actual = Arrays.asList(task);
         List<Task> expected = taskRepository.findByName(NAME);
-
         Assert.assertEquals(actual.get(0).getName(), expected.get(0).getName());
     }
 
