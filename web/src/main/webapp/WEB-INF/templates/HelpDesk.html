@@ -1,7 +1,7 @@
 <!doctype html>
-<html class="no-js" lang="en" dir="ltr" xmlns:th="http://www.thymeleaf.org">
-<html class="no-js" lang="en" dir="ltr" xmlns:th="http://www.w3.org/1999/xhtml">
-
+<html class="no-js" lang="en" dir="ltr"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/html">
 <head>
 
     <meta charset="utf-8">
@@ -17,23 +17,46 @@
     <link rel="stylesheet" href="/resources/css/app.css">
 </head>
 <body>
+<nav class="hover-underline-menu" data-menu-underline-from-center>
+    <ul class="dropdown menu" data-dropdown-menu>
+        <li><a href="/HelpDesk">Новости</a></li>
+        <li>
+            <a href="/HelpDesk">Игры</a>
+            <ul class="menu vertical">
+                <li><a href="/HelpDesk">Игры - базовая информация</a></li>
+                <li><a href="/HelpDesk">Игры - общее описание</a></li>
+            </ul>
+        </li>
+        <li><a href="/logout">Выход</a></li>
+    </ul>
+</nav>
 <div>
     <div class="row">
         <h1 align="center" th:text="#{HD.title}">Техподдержка</h1>
         <div class="grid-container">
             <div class="medium-3 columns">
             </div>
-            <!--<div class="callout">-->
-            <!--<img src="/resources/pic/registration.jpg">-->
             <div class="medium-6 columns">
                 <form id="1" th:action="@{/HelpDesk}" method="post" th:object="${taskDto}">
                     <textarea type="text" th:field="*{text}" th:placeholder="#{HD.text}" required="required"></textarea>
-                    <button type="submit" th:text="#{HD.submit}" class="success  expanded button">Зарегистрировать</button>
+                    <select th:field="*{typeOfJobId}">
+                        <option th:each="privilege : ${privileges}"
+                                th:value="${privilege.getId()}"
+                                th:text="${privilege.getNamePrivilege()}">
+                        </option>
+                    </select><br>
+                    <!--<select th:field="*{typeOfJobId}">-->
+                        <!--<option th:each="privilege : ${privileges}"-->
+                                <!--th:value="${privilege.getId()}"-->
+                                <!--th:text="${privilege.getNamePrivilege()}">-->
+                        <!--</option>-->
+                    <!--</select><br>-->
+                    <button type="submit" th:text="#{HD.submit}" class="success  expanded button">Зарегистрировать
+                    </button>
                 </form>
             </div>
             <div class="medium-3 columns">
             </div>
-            <!--</div>-->
         </div>
     </div>
 </div>

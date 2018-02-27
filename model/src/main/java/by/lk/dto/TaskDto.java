@@ -14,4 +14,5 @@ public class TaskDto extends BaseEntity {
     private String name;
     private Long typeOfJobId;
     private String text;
+    private String nameTypeOfJobId;
 }
