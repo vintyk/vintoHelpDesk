@@ -21,4 +21,6 @@ public class Task extends BaseEntity {
     @JoinColumn(name = "type_of_job_id")
     private TypeOfJobs typeOfJobId;
 
+    @Column(name = "text")
+    private String text;
 }

@@ -7,17 +7,35 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GAME Analitic</title>
+    <title>Help Desk</title>
     <!--<style type="text/css">-->
-        <!--div {-->
-            <!--background: url(resources/pic/backgrnd3.jpg)-->
-        <!--}-->
+    <!--div {-->
+    <!--background: url(resources/pic/backgrnd3.jpg)-->
+    <!--}-->
     <!--</style>-->
     <link rel="stylesheet" href="/resources/css/foundation.css">
     <link rel="stylesheet" href="/resources/css/app.css">
 </head>
 <body>
-<h1> Привет!!! Это Техподдержка.</h1>
+<div>
+    <div class="row">
+        <h1 align="center" th:text="#{HD.title}">Техподдержка</h1>
+        <div class="grid-container">
+            <div class="medium-3 columns">
+            </div>
+            <!--<div class="callout">-->
+            <!--<img src="/resources/pic/registration.jpg">-->
+            <div class="medium-6 columns">
+                <form id="1" th:action="@{/HelpDesk}" method="post" th:object="${taskDto}">
+                    <textarea type="text" th:field="*{text}" th:placeholder="#{HD.text}" required="required"></textarea>
+                    <button type="submit" th:text="#{HD.submit}" class="success  expanded button">Зарегистрировать</button>
+                </form>
+            </div>
+            <div class="medium-3 columns">
+            </div>
+            <!--</div>-->
+        </div>
+    </div>
 </div>
 
 <script src="/resources/js/vendor/jquery.js"></script>
