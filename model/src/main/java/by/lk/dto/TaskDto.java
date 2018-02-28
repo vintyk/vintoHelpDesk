@@ -12,7 +12,12 @@ import lombok.ToString;
 @Getter
 public class TaskDto extends BaseEntity {
     private String name;
-    private Long typeOfJobId;
     private String text;
+    private Long typeOfJobId;
     private String nameTypeOfJobId;
+    private Long branchId;
+    private String branchName;
+    private Long subdivisionId;
+    private String subdivisionName;
+    private Long systemUser;
 }

@@ -1,8 +1,8 @@
 package by.lk.controller;
 
 import by.lk.dto.TaskDto;
-import by.lk.entity.Privilege;
-import by.lk.repository.PrivilegeRepository;
+import by.lk.entity.TypeOfJobs;
+import by.lk.repository.TypeOfJobsRepository;
 import by.lk.services.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,21 +19,22 @@ import java.util.List;
 @Controller
 public class HelpDeskController {
     private final TaskService taskService;
-    private final PrivilegeRepository privilegeRepository;
+    private final TypeOfJobsRepository typeOfJobsRepository;
 
     @Autowired
-    public HelpDeskController(TaskService taskService, PrivilegeRepository privilegeRepository) {
+    public HelpDeskController(TaskService taskService, TypeOfJobsRepository typeOfJobsRepository) {
         this.taskService = taskService;
-        this.privilegeRepository = privilegeRepository;
+        this.typeOfJobsRepository = typeOfJobsRepository;
     }
 
     @ModelAttribute("taskDto")
-    public TaskDto taskDto(){
+    public TaskDto taskDto() {
         return new TaskDto();
     }
-    @ModelAttribute("privileges")
-    public List<Privilege> privilege(){
-        return privilegeRepository.findAll();
+
+    @ModelAttribute("typeOfJobs")
+    public List<TypeOfJobs> typeOfJobs() {
+        return typeOfJobsRepository.findAll();
     }
 
     @GetMapping(path = "/HelpDesk")

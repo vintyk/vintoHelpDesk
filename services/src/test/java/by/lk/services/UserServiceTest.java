@@ -27,6 +27,7 @@ public class UserServiceTest extends CommonTest {
         systemUserDto.setPrivilegeId(1L);
         id = userService.saveUser(systemUserDto);
     }
+
     @After
     public void finish() {
         systemUserRepository.delete(id);

@@ -40,9 +40,9 @@
                 <form id="1" th:action="@{/HelpDesk}" method="post" th:object="${taskDto}">
                     <textarea type="text" th:field="*{text}" th:placeholder="#{HD.text}" required="required"></textarea>
                     <select th:field="*{typeOfJobId}">
-                        <option th:each="privilege : ${privileges}"
-                                th:value="${privilege.getId()}"
-                                th:text="${privilege.getNamePrivilege()}">
+                        <option th:each="typeOfJob : ${typeOfJobs}"
+                                th:value="${typeOfJob.getId()}"
+                                th:text="${typeOfJob.getName()}">
                         </option>
                     </select><br>
                     <!--<select th:field="*{typeOfJobId}">-->
