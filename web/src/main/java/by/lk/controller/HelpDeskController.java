@@ -5,12 +5,16 @@ import by.lk.entity.TypeOfJobs;
 import by.lk.repository.TypeOfJobsRepository;
 import by.lk.services.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -38,7 +42,14 @@ public class HelpDeskController {
     }
 
     @GetMapping(path = "/HelpDesk")
-    public String showHelpDesk() {
+    public String showHelpDesk(Model model) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String systemUserEmail = user.getUsername();
+        Collection<GrantedAuthority> priveleges = user.getAuthorities();
+        if (priveleges.iterator().hasNext()){
+            model.addAttribute("userAuthority", priveleges.iterator().next().getAuthority().toString());
+        }
+        model.addAttribute("systemUsername", systemUserEmail);
         return "HelpDesk";
     }
 
