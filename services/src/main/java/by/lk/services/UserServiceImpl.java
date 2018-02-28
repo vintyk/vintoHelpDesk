@@ -1,7 +1,9 @@
 package by.lk.services;
 
 import by.lk.dto.SystemUserDto;
+import by.lk.entity.Branch;
 import by.lk.entity.Privilege;
+import by.lk.entity.Subdivision;
 import by.lk.entity.SystemUser;
 import by.lk.repository.SystemUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +41,10 @@ public class UserServiceImpl implements UserService {
         Privilege privilege = new Privilege();
         privilege.setId(systemUserDto.getPrivilegeId());
         privileges.add(privilege);
+        final Branch branch = new Branch();
+        branch.setId(systemUserDto.getBranchId());
+        final Subdivision subdivision = new Subdivision();
+        subdivision.setId(systemUserDto.getSubdivisionId());
 
         SystemUser systemUser = new SystemUser();
         systemUser.setNameUser(systemUserDto.getNameUser());
@@ -46,6 +52,8 @@ public class UserServiceImpl implements UserService {
         systemUser.setPasswordUser(quickPasswordEncodingGenerator(systemUserDto.getPasswordUser()));
         systemUser.setEmail(systemUserDto.getEmail());
         systemUser.setPrivilege(privileges);
+        systemUser.setBranch(branch);
+        systemUser.setSubdivision(subdivision);
         SystemUser userFromDb = systemUserRepository.save(systemUser);
         return userFromDb.getId();
     }

@@ -49,7 +49,8 @@ public class HelpDeskController {
     public String showHelpDesk(Model model) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String systemUserEmail = user.getUsername();
-        String branch = "";
+        SystemUser systemUser = userService.findByEmail(systemUserEmail);
+
         Collection<GrantedAuthority> priveleges = user.getAuthorities();
         if (priveleges.iterator().hasNext()){
             model.addAttribute("userAuthority", priveleges.iterator().next().getAuthority().toString());

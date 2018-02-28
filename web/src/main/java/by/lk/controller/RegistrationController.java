@@ -36,11 +36,11 @@ public class RegistrationController {
     public SystemUserDto systemUsersDto() {
         return new SystemUserDto();
     }
-    @ModelAttribute("branch")
+    @ModelAttribute("branches")
     public List<Branch> branch() {
         return branchRepository.findAll();
     }
-    @ModelAttribute("subdivision")
+    @ModelAttribute("subdivisions")
     public List<Subdivision> subdivisions() {
         return subdivisionRepository.findAll();
     }
@@ -59,6 +59,8 @@ public class RegistrationController {
         systemUserDtoForDB.setEmail(systemUsersDto.getEmail());
         systemUserDtoForDB.setPasswordUser(systemUsersDto.getPasswordUser());
         systemUserDtoForDB.setPrivilegeId(1L);
+        systemUserDtoForDB.setBranchId(systemUsersDto.getBranchId());
+        systemUserDtoForDB.setSubdivisionId(systemUsersDto.getSubdivisionId());
         userService.saveUser(systemUserDtoForDB);
         return "/Registration";
     }
