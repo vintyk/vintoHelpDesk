@@ -22,12 +22,6 @@ public class Task extends BaseEntity {
     @Column(name = "text")
     private String text;
     @ManyToOne
-    @JoinColumn(name = "branch_id")
-    private Branch branch;
-    @ManyToOne
-    @JoinColumn(name = "subdivision_id")
-    private Subdivision subdivision;
-    @ManyToOne
     @JoinColumn(name = "system_user_id")
     private SystemUser systemUser;
 }

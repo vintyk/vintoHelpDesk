@@ -31,14 +31,15 @@ public class SystemUser extends BaseEntity {
     @NotEmpty
     @Column(name = "password", nullable = false)
     private String passwordUser;
-
-
- //    @ManyToOne
-//    @JoinColumn(name = "privilege_id")
-//    private Privilege privilege;
     @JoinTable(name = "users_privileges",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "privilege_id"))
     @ManyToMany
     private Set<Privilege> privilege = new HashSet<>();
+    @ManyToOne
+    @JoinColumn(name = "branch_id")
+    private Branch branch;
+    @ManyToOne
+    @JoinColumn(name = "subdivision_id")
+    private Subdivision subdivision;
 }

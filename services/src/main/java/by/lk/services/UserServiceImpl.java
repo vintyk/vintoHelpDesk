@@ -4,7 +4,6 @@ import by.lk.dto.SystemUserDto;
 import by.lk.entity.Privilege;
 import by.lk.entity.SystemUser;
 import by.lk.repository.SystemUserRepository;
-import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -34,26 +33,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String userEmail) throws UsernameNotFoundException {
-        SystemUser foundSystemUser = systemUserRepository.findByEmail(userEmail);
-        if (foundSystemUser == null) {
-            throw new UsernameNotFoundException("Такой E-Mail не найден в Базе Данных!");
-        }
-        return new User(foundSystemUser.getEmail(),
-                foundSystemUser.getPasswordUser(),
-                getUserAuthorities(foundSystemUser));
-    }
-
-    private Set<GrantedAuthority> getUserAuthorities(SystemUser systemUser) {
-        Set<Privilege> roles = systemUser.getPrivilege();
-        Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
-        for (Privilege role : roles) {
-            grantedAuthorities.add(new SimpleGrantedAuthority(role.getNamePrivilege()));
-        }
-        return grantedAuthorities;
-    }
-
-    @Override
     public Long saveUser(SystemUserDto systemUserDto) {
 
         Set<Privilege> privileges = new HashSet<>();
@@ -72,8 +51,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public SystemUser findByEmail(String name) {
-        return systemUserRepository.findByEmail(name);
+    public SystemUser findByEmail(String eMail) {
+        return systemUserRepository.findByEmail(eMail);
     }
 
     @Override
@@ -84,6 +63,26 @@ public class UserServiceImpl implements UserService {
     @Override
     public SystemUser findById(Long id) {
         return systemUserRepository.findOne(id);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String userEmail) throws UsernameNotFoundException {
+        SystemUser foundSystemUser = systemUserRepository.findByEmail(userEmail);
+        if (foundSystemUser == null) {
+            throw new UsernameNotFoundException("Такой E-Mail не найден в Базе Данных!");
+        }
+        return new User(foundSystemUser.getEmail(),
+                foundSystemUser.getPasswordUser(),
+                getUserAuthorities(foundSystemUser));
+    }
+
+    private Set<GrantedAuthority> getUserAuthorities(SystemUser systemUser) {
+        Set<Privilege> roles = systemUser.getPrivilege();
+        Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
+        for (Privilege role : roles) {
+            grantedAuthorities.add(new SimpleGrantedAuthority(role.getNamePrivilege()));
+        }
+        return grantedAuthorities;
     }
 
     private String quickPasswordEncodingGenerator(String password) {

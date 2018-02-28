@@ -1,9 +1,11 @@
 package by.lk.controller;
 
 import by.lk.dto.TaskDto;
+import by.lk.entity.SystemUser;
 import by.lk.entity.TypeOfJobs;
 import by.lk.repository.TypeOfJobsRepository;
 import by.lk.services.TaskService;
+import by.lk.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -24,11 +26,13 @@ import java.util.List;
 public class HelpDeskController {
     private final TaskService taskService;
     private final TypeOfJobsRepository typeOfJobsRepository;
+    private final UserService userService;
 
     @Autowired
-    public HelpDeskController(TaskService taskService, TypeOfJobsRepository typeOfJobsRepository) {
+    public HelpDeskController(TaskService taskService, TypeOfJobsRepository typeOfJobsRepository, UserService userService) {
         this.taskService = taskService;
         this.typeOfJobsRepository = typeOfJobsRepository;
+        this.userService = userService;
     }
 
     @ModelAttribute("taskDto")
@@ -45,11 +49,13 @@ public class HelpDeskController {
     public String showHelpDesk(Model model) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String systemUserEmail = user.getUsername();
+        String branch = "";
         Collection<GrantedAuthority> priveleges = user.getAuthorities();
         if (priveleges.iterator().hasNext()){
             model.addAttribute("userAuthority", priveleges.iterator().next().getAuthority().toString());
         }
         model.addAttribute("systemUsername", systemUserEmail);
+        model.addAttribute("Branch", systemUserEmail);
         return "HelpDesk";
     }
 

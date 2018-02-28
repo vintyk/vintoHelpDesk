@@ -26,10 +26,6 @@ public class TaskRepositoryTest extends CommonTest {
     public void saveTest() {
         TypeOfJobs typeOfJobs = new TypeOfJobs();
         typeOfJobs.setId(1L);
-        Branch branch = new Branch();
-        branch.setId(1L);
-        Subdivision subdivision = new Subdivision();
-        subdivision.setId(1L);
 
         Set<Privilege> privileges = new HashSet<>();
         Privilege privilege = new Privilege();
@@ -48,8 +44,7 @@ public class TaskRepositoryTest extends CommonTest {
         task.setName("Виталий");
         task.setTypeOfJobId(typeOfJobs);
         task.setText("Это заявка в свободной форме.");
-        task.setBranch(branch);
-        task.setSubdivision(subdivision);
+
         task.setSystemUser(systemUser);
         taskId = taskRepository.save(task);
 
@@ -64,17 +59,13 @@ public class TaskRepositoryTest extends CommonTest {
         TypeOfJobs typeOfJobs = new TypeOfJobs();
         typeOfJobs.setId(1L);
         typeOfJobs.setName("Наладка");
-        Branch branch = new Branch();
-        branch.setId(1L);
-        Subdivision subdivision = new Subdivision();
-        subdivision.setId(1L);
+
 
         Task task = new Task();
         task.setName(NAME);
         task.setTypeOfJobId(typeOfJobs);
         task.setText("Это заявка в свободной форме 2.");
-        task.setBranch(branch);
-        task.setSubdivision(subdivision);
+
         taskId = taskRepository.save(task);
 
         List<Task> actual = Arrays.asList(task);

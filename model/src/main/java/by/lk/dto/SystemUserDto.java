@@ -21,4 +21,8 @@ public class SystemUserDto extends BaseEntity {
     private String email;
     private String passwordUser;
     private Long privilegeId;
+    private Long branchId;
+    private String branchName;
+    private Long subdivisionId;
+    private String subdivisionName;
 }

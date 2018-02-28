@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.20, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: vintohelpdesk
 -- ------------------------------------------------------
--- Server version	5.7.17-log
+-- Server version	5.7.20-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,6 +16,30 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `branch`
+--
+
+DROP TABLE IF EXISTS `branch`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `branch` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `branch`
+--
+
+LOCK TABLES `branch` WRITE;
+/*!40000 ALTER TABLE `branch` DISABLE KEYS */;
+INSERT INTO `branch` VALUES (1,'Минск'),(2,'Колядичи');
+/*!40000 ALTER TABLE `branch` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `privileges`
 --
 
@@ -26,7 +50,7 @@ CREATE TABLE `privileges` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -35,8 +59,32 @@ CREATE TABLE `privileges` (
 
 LOCK TABLES `privileges` WRITE;
 /*!40000 ALTER TABLE `privileges` DISABLE KEYS */;
-INSERT INTO `privileges` VALUES (1,'user'),(2,'admin'),(3,'operator');
+INSERT INTO `privileges` VALUES (1,'User'),(2,'Admin'),(3,'Operator'),(4,'executor');
 /*!40000 ALTER TABLE `privileges` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `subdivision`
+--
+
+DROP TABLE IF EXISTS `subdivision`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `subdivision` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `subdivision`
+--
+
+LOCK TABLES `subdivision` WRITE;
+/*!40000 ALTER TABLE `subdivision` DISABLE KEYS */;
+INSERT INTO `subdivision` VALUES (1,'Бухгалтерия'),(2,'Маркетинг');
+/*!40000 ALTER TABLE `subdivision` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -53,10 +101,16 @@ CREATE TABLE `system_user` (
   `e_mail` varchar(50) NOT NULL,
   `privilege_id` int(11) DEFAULT NULL,
   `password` varchar(100) NOT NULL,
+  `branch_id` int(11) DEFAULT NULL,
+  `subdivision_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `system_user_privilege_id_fk` (`privilege_id`),
-  CONSTRAINT `system_user_privilege_id_fk` FOREIGN KEY (`privilege_id`) REFERENCES `privileges` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=utf8;
+  KEY `system_user_branch_id_fk` (`branch_id`),
+  KEY `system_user_subdivision_id_fk` (`subdivision_id`),
+  CONSTRAINT `system_user_branch_id_fk` FOREIGN KEY (`branch_id`) REFERENCES `branch` (`id`),
+  CONSTRAINT `system_user_privilege_id_fk` FOREIGN KEY (`privilege_id`) REFERENCES `privileges` (`id`),
+  CONSTRAINT `system_user_subdivision_id_fk` FOREIGN KEY (`subdivision_id`) REFERENCES `subdivision` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=98 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -65,7 +119,7 @@ CREATE TABLE `system_user` (
 
 LOCK TABLES `system_user` WRITE;
 /*!40000 ALTER TABLE `system_user` DISABLE KEYS */;
-INSERT INTO `system_user` VALUES (38,'Виталий','Ушаков','uv@ecp.by',1,'$2a$10$VJZXoNeGBMS9S/6/uyxgku79K4xOyM2G3Pt5CVlCS1u85af/MFh.a'),(39,'Виталий','Ушаков','SystemUserRepositoryTest',1,'$2a$10$8MTEvrRHsHSCOdG9zKfmM.rYZx1vPv./220/g3G6Jo7GA85dAM14i'),(41,'Виталий','Ушаков','vinty@i.ua',1,'$2a$10$pD2l/XsEB9T5ZC2Rq077ve3eAccPITsGB/LzHbk2pZCsuF1bYZfdu'),(49,'d','d','d',1,'$2a$10$PGkCs0VH3kg4nfRg8YuttODzXuJQ4M23saaM4q6FIT5fYx7mjtHO6'),(51,'Виталий','Ушаков','v',1,'$2a$10$TMreBSgu7gAEGzzeS.k78u7OUpDv4dfpf6AnzgdXjhY3pr8LJdaqy'),(52,'a','a','a',1,'$2a$10$21ftLy/DP5YoqzmXZoxyguQNBNGEM8cl5YBWhZyQJJUQwzTQmL9Ru'),(53,'h','h','h',1,'$2a$10$Y3FWWx28mAONpZlUCJYan.q41BkH4W3ibnt3C9B6GObw47i8P5Dua'),(55,'Виталий','Ушаков','v',NULL,'$2a$10$Amar/ympKM57I1Yj4/9pduU.DOw7l4JM4dwQL2j6HJjDH08qhR/QK'),(56,'Vitaly','Ushakov','vinty1978@gmail.com',NULL,'$2a$10$jMav42.e0sfybflq8r8A6eL8bYYBXFZZTUPAGKNa1IVVevoG1ecwu');
+INSERT INTO `system_user` VALUES (56,'Vitaly','Ushakov','vinty1978@gmail.com',NULL,'$2a$10$pD2l/XsEB9T5ZC2Rq077ve3eAccPITsGB/LzHbk2pZCsuF1bYZfdu',NULL,NULL),(70,'Вит','Ушаков','uv@ecp.by',NULL,'$2a$10$Vy1GGvH9WVma.yZveWtGpOuwojtG.bupplNOxi80MhbYvllFJBZiq',NULL,NULL),(71,'Ярослав','Зыскунов','lk@ecp.by',NULL,'$2a$10$PvIldFa3GEwNCBhtDGQ18eycG26iu25QBIip1DXBiA9CCW2un5J7m',NULL,NULL),(97,'Кирилл','Красовский','v@u.a',NULL,'$2a$10$iG25XgcOiNFDTiNRi1M5I.C6Vxsgtug4ZpuI6NsweS9LjULVlRDrW',NULL,NULL);
 /*!40000 ALTER TABLE `system_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -81,11 +135,14 @@ CREATE TABLE `task` (
   `name` varchar(50) DEFAULT NULL,
   `type_of_job_id` int(11) DEFAULT NULL,
   `text` text,
+  `system_user_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `task_id_uindex` (`id`),
   KEY `task_type_of_jobs_id_fk` (`type_of_job_id`),
+  KEY `task_system_user_id_fk` (`system_user_id`),
+  CONSTRAINT `task_system_user_id_fk` FOREIGN KEY (`system_user_id`) REFERENCES `system_user` (`id`),
   CONSTRAINT `task_type_of_jobs_id_fk` FOREIGN KEY (`type_of_job_id`) REFERENCES `type_of_jobs` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -94,7 +151,7 @@ CREATE TABLE `task` (
 
 LOCK TABLES `task` WRITE;
 /*!40000 ALTER TABLE `task` DISABLE KEYS */;
-INSERT INTO `task` VALUES (2,'Коля',1,NULL),(19,NULL,1,'sdhfgsdfgh'),(20,NULL,1,'fghrtyjdfbncvkmfguk'),(21,NULL,1,'sdfgsd\r\nsdfgsdfhs\r\nggggggggggggggggg\r\nмммммммммммм\r\nрррррррррррррррррррррррррррррррррррррррр\r\nшшшшшшшшшшшшшшш\r\n');
+INSERT INTO `task` VALUES (2,'Коля',1,NULL,NULL),(19,NULL,1,'sdhfgsdfgh',NULL),(20,NULL,1,'fghrtyjdfbncvkmfguk',NULL),(21,NULL,1,'sdfgsd\r\nsdfgsdfhs\r\nggggggggggggggggg\r\nмммммммммммм\r\nрррррррррррррррррррррррррррррррррррррррр\r\nшшшшшшшшшшшшшшш\r\n',NULL),(22,NULL,1,'dsffdfffffffffffffffffffffffffffffff hhhhhhhhhhhhhhhhhhhhh\r\nsadfgasdlkfglsadkfglsdkfghlksdfg\r\nakdsfgpsdlfkg;lsdkjfh;sjdf\'hbjadf;ja;dfkgja\r\najsdfaljkf;gjagjafdg\r\nagjaplsdjkg;aljdg]aosdjglad\r\ng',NULL),(23,NULL,1,'Надо починять принтир!!!!!! Нихрена не работаеть!!!!!! ПАМАГИТЯ!!!!!!!!!!',NULL),(24,NULL,1,'AWDGAERGASDRF',NULL),(29,NULL,1,'Нихуя не работает',NULL),(47,NULL,1,'sfghsdfghedfghdfg',NULL);
 /*!40000 ALTER TABLE `task` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -145,7 +202,7 @@ CREATE TABLE `users_privileges` (
 
 LOCK TABLES `users_privileges` WRITE;
 /*!40000 ALTER TABLE `users_privileges` DISABLE KEYS */;
-INSERT INTO `users_privileges` VALUES (55,1),(56,1);
+INSERT INTO `users_privileges` VALUES (56,1),(97,1),(70,2),(71,3);
 /*!40000 ALTER TABLE `users_privileges` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -158,4 +215,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-02-26 23:30:26
+-- Dump completed on 2018-02-28 16:15:31
