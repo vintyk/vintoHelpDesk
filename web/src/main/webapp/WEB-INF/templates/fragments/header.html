@@ -1,0 +1,40 @@
+<!doctype html>
+<html class="no-js" lang="en" dir="ltr"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help Desk</title>
+    <link rel="stylesheet" href="/resources/css/foundation.css">
+    <link rel="stylesheet" href="/resources/css/app.css">
+</head>
+<body>
+<div th:fragment="header">
+<nav class="hover-underline-menu" data-menu-underline-from-center>
+    <ul class="dropdown menu" data-dropdown-menu>
+        <li><a href="/HelpDesk">Test</a></li>
+        <li>
+            <a href="/HelpDesk">Test</a>
+            <ul class="menu vertical">
+                <li><a href="/HelpDesk">Test - базовая информация</a></li>
+                <li><a href="/HelpDesk">Test - общее описание</a></li>
+            </ul>
+        </li>
+        <li th:if="${userAuthority.equals('Admin')}">
+            <a href="/Admin">Администратор</a>
+        </li>
+        <li th:if="${userAuthority.equals('Operator')}">
+            <a href="/Operator">Оператор</a>
+        </li>
+        <!--<ul class="nav navbar-nav">-->
+        <!--<li class="active"><a th:href="@{/adminEdit}"-->
+        <!--sec:authorize="hasAuthority('Admin')">Администратор</a></li>-->
+        <!--</ul>-->
+        <li><a href="/logout">Выход</a></li>
+    </ul>
+</nav>
+</div>
+</body>
+</html>

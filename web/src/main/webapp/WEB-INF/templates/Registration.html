@@ -35,6 +35,18 @@
                     <span th:text="#{login.family}">family</span>
                     <!--<label th:for="familyUser">Фамилия</label>-->
                     <input type="text" th:field="*{familyUser}" th:placeholder="#{registration.enterFamily}">
+                    <select th:field="*{branchId}">
+                        <option th:each="branch : ${branches}"
+                                th:value="${branch.id}"
+                                th:text="${branch.name}">
+                        </option>
+                    </select><br>
+                    <select th:field="*{subdivisionId}">
+                        <option th:each="subdivision : ${subdivisions}"
+                                th:value="${subdivision.id}"
+                                th:text="${subdivision.name}">
+                        </option>
+                    </select><br>
                     <button type="submit" th:text="#{login.registration}" class="success  expanded button">Зарегистрировать</button>
                     <a class="hollow expanded button" href="/login" th:text="#{login.enter}">Вход в систему</a>
                 </form>

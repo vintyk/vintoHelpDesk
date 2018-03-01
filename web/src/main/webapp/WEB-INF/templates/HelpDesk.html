@@ -1,39 +1,54 @@
 <!doctype html>
-<html class="no-js" lang="en" dir="ltr" xmlns:th="http://www.thymeleaf.org">
-<html class="no-js" lang="en" dir="ltr" xmlns:th="http://www.w3.org/1999/xhtml">
-
+<html class="no-js" lang="en" dir="ltr"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/html">
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Help Desk</title>
-    <!--<style type="text/css">-->
-    <!--div {-->
-    <!--background: url(resources/pic/backgrnd3.jpg)-->
-    <!--}-->
-    <!--</style>-->
     <link rel="stylesheet" href="/resources/css/foundation.css">
     <link rel="stylesheet" href="/resources/css/app.css">
 </head>
 <body>
+<div th:replace="fragments/header :: header"></div>
 <div>
     <div class="row">
         <h1 align="center" th:text="#{HD.title}">Техподдержка</h1>
         <div class="grid-container">
             <div class="medium-3 columns">
             </div>
-            <!--<div class="callout">-->
-            <!--<img src="/resources/pic/registration.jpg">-->
             <div class="medium-6 columns">
+                <h3 th:text="${systemUsername}"></h3>
+                <div th:switch="${userAuthority}">
+                    <p th:case="'Admin'">У вас права администратора.</p>
+                    <p th:case="'Operator'">У вас права оператора.</p>
+                    <p th:case="'User'">У вас права пользователя.</p>
+                </div>
+                <div th:if="${userAuthority.equals('Admin')}">
+                    <div>Ты админко!!!! Тока Тсссс....</div>
+                </div>
+
                 <form id="1" th:action="@{/HelpDesk}" method="post" th:object="${taskDto}">
-                    <textarea type="text" th:field="*{text}" th:placeholder="#{HD.text}" required="required"></textarea>
-                    <button type="submit" th:text="#{HD.submit}" class="success  expanded button">Зарегистрировать</button>
+                    <textarea rows="7" type="text" th:field="*{text}" th:placeholder="#{HD.text}" required="required"></textarea>
+                    <select th:field="*{typeOfJobId}">
+                        <option th:each="typeOfJob : ${typeOfJobs}"
+                                th:value="${typeOfJob.getId()}"
+                                th:text="${typeOfJob.getName()}">
+                        </option>
+                    </select><br>
+                    <!--<select th:field="*{typeOfJobId}">-->
+                    <!--<option th:each="privilege : ${privileges}"-->
+                    <!--th:value="${privilege.getId()}"-->
+                    <!--th:text="${privilege.getNamePrivilege()}">-->
+                    <!--</option>-->
+                    <!--</select><br>-->
+                    <button type="submit" th:text="#{HD.submit}" class="success  expanded button">Зарегистрировать
+                    </button>
                 </form>
             </div>
             <div class="medium-3 columns">
             </div>
-            <!--</div>-->
         </div>
     </div>
 </div>

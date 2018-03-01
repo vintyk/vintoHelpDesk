@@ -1,10 +1,11 @@
 package by.lk.services;
 
 import by.lk.dto.SystemUserDto;
+import by.lk.entity.Branch;
 import by.lk.entity.Privilege;
+import by.lk.entity.Subdivision;
 import by.lk.entity.SystemUser;
 import by.lk.repository.SystemUserRepository;
-import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -34,6 +35,45 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public Long saveUser(SystemUserDto systemUserDto) {
+
+        Set<Privilege> privileges = new HashSet<>();
+        Privilege privilege = new Privilege();
+        privilege.setId(systemUserDto.getPrivilegeId());
+        privileges.add(privilege);
+        final Branch branch = new Branch();
+        branch.setId(systemUserDto.getBranchId());
+        final Subdivision subdivision = new Subdivision();
+        subdivision.setId(systemUserDto.getSubdivisionId());
+
+        SystemUser systemUser = new SystemUser();
+        systemUser.setNameUser(systemUserDto.getNameUser());
+        systemUser.setFamilyUser(systemUserDto.getFamilyUser());
+        systemUser.setPasswordUser(quickPasswordEncodingGenerator(systemUserDto.getPasswordUser()));
+        systemUser.setEmail(systemUserDto.getEmail());
+        systemUser.setPrivilege(privileges);
+        systemUser.setBranch(branch);
+        systemUser.setSubdivision(subdivision);
+        SystemUser userFromDb = systemUserRepository.save(systemUser);
+        return userFromDb.getId();
+    }
+
+    @Override
+    public SystemUser findByEmail(String eMail) {
+        return systemUserRepository.findByEmail(eMail);
+    }
+
+    @Override
+    public List<SystemUser> findAll() {
+        return systemUserRepository.findAll();
+    }
+
+    @Override
+    public SystemUser findById(Long id) {
+        return systemUserRepository.findOne(id);
+    }
+
+    @Override
     public UserDetails loadUserByUsername(String userEmail) throws UsernameNotFoundException {
         SystemUser foundSystemUser = systemUserRepository.findByEmail(userEmail);
         if (foundSystemUser == null) {
@@ -51,39 +91,6 @@ public class UserServiceImpl implements UserService {
             grantedAuthorities.add(new SimpleGrantedAuthority(role.getNamePrivilege()));
         }
         return grantedAuthorities;
-    }
-
-    @Override
-    public Long saveUser(SystemUserDto systemUserDto) {
-
-        Set<Privilege> privileges = new HashSet<>();
-        Privilege privilege = new Privilege();
-        privilege.setId(systemUserDto.getPrivilegeId());
-        privileges.add(privilege);
-
-        SystemUser systemUser = new SystemUser();
-        systemUser.setNameUser(systemUserDto.getNameUser());
-        systemUser.setFamilyUser(systemUserDto.getFamilyUser());
-        systemUser.setPasswordUser(quickPasswordEncodingGenerator(systemUserDto.getPasswordUser()));
-        systemUser.setEmail(systemUserDto.getEmail());
-        systemUser.setPrivilege(privileges);
-        SystemUser userFromDb = systemUserRepository.save(systemUser);
-        return userFromDb.getId();
-    }
-
-    @Override
-    public SystemUser findByEmail(String name) {
-        return systemUserRepository.findByEmail(name);
-    }
-
-    @Override
-    public List<SystemUser> findAll() {
-        return systemUserRepository.findAll();
-    }
-
-    @Override
-    public SystemUser findById(Long id) {
-        return systemUserRepository.findOne(id);
     }
 
     private String quickPasswordEncodingGenerator(String password) {

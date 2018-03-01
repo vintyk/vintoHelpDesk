@@ -16,11 +16,12 @@ import javax.persistence.*;
 public class Task extends BaseEntity {
     @Column(name = "name")
     private String name;
-
     @ManyToOne
     @JoinColumn(name = "type_of_job_id")
     private TypeOfJobs typeOfJobId;
-
     @Column(name = "text")
     private String text;
+    @ManyToOne
+    @JoinColumn(name = "system_user_id")
+    private SystemUser systemUser;
 }
