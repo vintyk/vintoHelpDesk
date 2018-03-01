@@ -66,10 +66,14 @@ public class HelpDeskController {
     }
 
     @PostMapping(path = "/HelpDesk")
-    public String taskDto(TaskDto taskDto, Model model, HttpSession httpSession) {
-        taskDto.setTypeOfJobId(1L);
-        taskDto.setSystemUser((Long) httpSession.getAttribute("httpUserId"));
-        taskService.saveTask(taskDto);
+    public String taskDto(TaskDto taskDtoFromView, Model model, HttpSession httpSession) {
+        TaskDto taskDtoForBd = new TaskDto();
+        taskDtoForBd.setName(taskDtoFromView.getName());
+        taskDtoForBd.setTypeOfJobId(1L);
+        taskDtoForBd.setText(taskDtoFromView.getText());
+        taskDtoForBd.setSystemUser((Long) httpSession.getAttribute("httpUserId"));
+        System.out.println(httpSession.getAttribute("httpUserId"));
+        taskService.saveTask(taskDtoForBd);
         model.addAttribute("systemUsername", httpSession.getAttribute("httpEmail"));
         model.addAttribute("userAuthority", httpSession.getAttribute("httpUserAuthority"));
         return "HelpDesk";

@@ -1,6 +1,7 @@
 package by.lk.services;
 
 import by.lk.dto.TaskDto;
+import by.lk.entity.SystemUser;
 import by.lk.entity.Task;
 import by.lk.entity.TypeOfJobs;
 import by.lk.repository.TaskRepository;
@@ -28,11 +29,14 @@ public class TaskServiceImpl implements TaskService {
     public Long saveTask(TaskDto taskDto) {
         TypeOfJobs typeOfJobs = new TypeOfJobs();
         typeOfJobs.setId(taskDto.getTypeOfJobId());
+        SystemUser systemUser = new SystemUser();
+        systemUser.setId(taskDto.getSystemUser());
 
         Task task = new Task();
         task.setName(taskDto.getName());
         task.setText(taskDto.getText());
         task.setTypeOfJobId(typeOfJobs);
+        task.setSystemUser(systemUser);
         Task saveId = taskRepository.save(task);
         return saveId.getId();
     }
