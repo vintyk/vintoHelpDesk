@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.servlet.http.HttpSession;
 import java.util.Collection;
 import java.util.List;
 
@@ -46,24 +47,31 @@ public class HelpDeskController {
     }
 
     @GetMapping(path = "/HelpDesk")
-    public String showHelpDesk(Model model) {
+    public String showHelpDesk(Model model, HttpSession httpSession) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String systemUserEmail = user.getUsername();
-        SystemUser systemUser = userService.findByEmail(systemUserEmail);
-
-        Collection<GrantedAuthority> priveleges = user.getAuthorities();
-        if (priveleges.iterator().hasNext()){
-            model.addAttribute("userAuthority", priveleges.iterator().next().getAuthority().toString());
-        }
         model.addAttribute("systemUsername", systemUserEmail);
-        model.addAttribute("Branch", systemUserEmail);
+        SystemUser systemUser = userService.findByEmail(systemUserEmail);
+        httpSession.setAttribute("httpUserId", systemUser.getId());
+        httpSession.setAttribute("httpBranch", systemUser.getBranch());
+        httpSession.setAttribute("httpSubdivision", systemUser.getSubdivision());
+        httpSession.setAttribute("httpEmail", systemUser.getEmail());
+        Collection<GrantedAuthority> priveleges = user.getAuthorities();
+        if (priveleges.iterator().hasNext()) {
+            httpSession.setAttribute("httpUserAuthority", priveleges.iterator().next().getAuthority().toString());
+            model.addAttribute("userAuthority", priveleges.iterator().next().getAuthority().toString());
+//            model.addAttribute("userAuthority", httpSession.getAttribute("httpUserAuthority"));
+        }
         return "HelpDesk";
     }
 
     @PostMapping(path = "/HelpDesk")
-    public String taskDto(TaskDto taskDto, Model model) {
+    public String taskDto(TaskDto taskDto, Model model, HttpSession httpSession) {
         taskDto.setTypeOfJobId(1L);
+        taskDto.setSystemUser((Long) httpSession.getAttribute("httpUserId"));
         taskService.saveTask(taskDto);
+        model.addAttribute("systemUsername", httpSession.getAttribute("httpEmail"));
+        model.addAttribute("userAuthority", httpSession.getAttribute("httpUserAuthority"));
         return "HelpDesk";
     }
 }

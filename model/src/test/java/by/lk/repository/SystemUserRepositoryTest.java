@@ -84,13 +84,13 @@ public class SystemUserRepositoryTest extends CommonTest {
         Assert.assertEquals("Поиск электронной почты: ", id.getEmail(), userFromDb.getEmail());
         SystemUser userFromDb2 = systemUserRepository.findByEmail("lk@gmail.com");
         Assert.assertEquals("Поиск электронной почты: ", id2.getEmail(), userFromDb2.getEmail());
+        systemUserRepository.delete(id2);
     }
 
 
     @After
     public void finish() {
         systemUserRepository.delete(id);
-        systemUserRepository.delete(id2);
         final SystemUser one = systemUserRepository.findOne(id.getId());
         assertNull(one);
     }
