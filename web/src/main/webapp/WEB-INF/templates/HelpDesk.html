@@ -43,16 +43,39 @@
                     <!--th:text="${privilege.getNamePrivilege()}">-->
                     <!--</option>-->
                     <!--</select><br>-->
-                    <button type="submit" th:text="#{HD.submit}" class="success  expanded button">Зарегистрировать
+                    <button type="submit" th:text="#{HD.submit}" class="success expanded button">Зарегистрировать
                     </button>
                 </form>
+                <h2 align="center" th:text="#{HD.self}">Свои заявки</h2>
+                <!--<div th:replace="fragments/table :: table"/>-->
+                <div th:fragment="table">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th width="100">Номер заявки</th>
+                            <th width="400">Текст</th>
+                            <th>Принял оператор</th>
+                            <th>Время принятия</th>
+                            <th>Исполнитель</th>
+                            <th>Завершена в... </th>
+                        </tr>
+                        </thead>
+                        <tr th:each="task : ${taskDtoList}">
+                            <td th:text="${task.id}"></td>
+                            <td th:text="${task.text}"></td>
+                            <td th:text="${Оператор неопределен}"></td>
+                            <td th:text="${время неопределено}"></td>
+                            <td th:text="${Исполнитель неопределен}"></td>
+                            <td th:text="${завершение не работает}"></td>
+                        </tr>
+                    </table>
+                </div>
             </div>
             <div class="medium-3 columns">
             </div>
         </div>
     </div>
 </div>
-
 <script src="/resources/js/vendor/jquery.js"></script>
 <script src="/resources/js/vendor/what-input.js"></script>
 <script src="/resources/js/vendor/foundation.js"></script>

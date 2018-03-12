@@ -36,14 +36,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Long saveUser(SystemUserDto systemUserDto) {
-
         Set<Privilege> privileges = new HashSet<>();
         Privilege privilege = new Privilege();
         privilege.setId(systemUserDto.getPrivilegeId());
         privileges.add(privilege);
-        final Branch branch = new Branch();
+        Branch branch = new Branch();
         branch.setId(systemUserDto.getBranchId());
-        final Subdivision subdivision = new Subdivision();
+        Subdivision subdivision = new Subdivision();
         subdivision.setId(systemUserDto.getSubdivisionId());
 
         SystemUser systemUser = new SystemUser();

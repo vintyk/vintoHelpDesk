@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.20, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: vintohelpdesk
 -- ------------------------------------------------------
--- Server version	5.7.20-log
+-- Server version	5.7.17-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -110,7 +110,7 @@ CREATE TABLE `system_user` (
   CONSTRAINT `system_user_branch_id_fk` FOREIGN KEY (`branch_id`) REFERENCES `branch` (`id`),
   CONSTRAINT `system_user_privilege_id_fk` FOREIGN KEY (`privilege_id`) REFERENCES `privileges` (`id`),
   CONSTRAINT `system_user_subdivision_id_fk` FOREIGN KEY (`subdivision_id`) REFERENCES `subdivision` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=98 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=200 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -119,7 +119,7 @@ CREATE TABLE `system_user` (
 
 LOCK TABLES `system_user` WRITE;
 /*!40000 ALTER TABLE `system_user` DISABLE KEYS */;
-INSERT INTO `system_user` VALUES (56,'Vitaly','Ushakov','vinty1978@gmail.com',NULL,'$2a$10$pD2l/XsEB9T5ZC2Rq077ve3eAccPITsGB/LzHbk2pZCsuF1bYZfdu',NULL,NULL),(70,'Вит','Ушаков','uv@ecp.by',NULL,'$2a$10$Vy1GGvH9WVma.yZveWtGpOuwojtG.bupplNOxi80MhbYvllFJBZiq',NULL,NULL),(71,'Ярослав','Зыскунов','lk@ecp.by',NULL,'$2a$10$PvIldFa3GEwNCBhtDGQ18eycG26iu25QBIip1DXBiA9CCW2un5J7m',NULL,NULL),(97,'Кирилл','Красовский','v@u.a',NULL,'$2a$10$iG25XgcOiNFDTiNRi1M5I.C6Vxsgtug4ZpuI6NsweS9LjULVlRDrW',NULL,NULL);
+INSERT INTO `system_user` VALUES (56,'Vitaly','Ushakov','vinty1978@gmail.com',NULL,'$2a$10$pD2l/XsEB9T5ZC2Rq077ve3eAccPITsGB/LzHbk2pZCsuF1bYZfdu',1,1),(70,'Вит','Ушаков','uv@ecp.by',NULL,'$2a$10$Vy1GGvH9WVma.yZveWtGpOuwojtG.bupplNOxi80MhbYvllFJBZiq',1,2),(71,'Ярослав','Зыскунов','lk@ecp.by',NULL,'$2a$10$PvIldFa3GEwNCBhtDGQ18eycG26iu25QBIip1DXBiA9CCW2un5J7m',1,2),(97,'Кирилл','Красовский','v@u.a',NULL,'$2a$10$iG25XgcOiNFDTiNRi1M5I.C6Vxsgtug4ZpuI6NsweS9LjULVlRDrW',1,1);
 /*!40000 ALTER TABLE `system_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -142,7 +142,7 @@ CREATE TABLE `task` (
   KEY `task_system_user_id_fk` (`system_user_id`),
   CONSTRAINT `task_system_user_id_fk` FOREIGN KEY (`system_user_id`) REFERENCES `system_user` (`id`),
   CONSTRAINT `task_type_of_jobs_id_fk` FOREIGN KEY (`type_of_job_id`) REFERENCES `type_of_jobs` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -151,7 +151,7 @@ CREATE TABLE `task` (
 
 LOCK TABLES `task` WRITE;
 /*!40000 ALTER TABLE `task` DISABLE KEYS */;
-INSERT INTO `task` VALUES (2,'Коля',1,NULL,NULL),(19,NULL,1,'sdhfgsdfgh',NULL),(20,NULL,1,'fghrtyjdfbncvkmfguk',NULL),(21,NULL,1,'sdfgsd\r\nsdfgsdfhs\r\nggggggggggggggggg\r\nмммммммммммм\r\nрррррррррррррррррррррррррррррррррррррррр\r\nшшшшшшшшшшшшшшш\r\n',NULL),(22,NULL,1,'dsffdfffffffffffffffffffffffffffffff hhhhhhhhhhhhhhhhhhhhh\r\nsadfgasdlkfglsadkfglsdkfghlksdfg\r\nakdsfgpsdlfkg;lsdkjfh;sjdf\'hbjadf;ja;dfkgja\r\najsdfaljkf;gjagjafdg\r\nagjaplsdjkg;aljdg]aosdjglad\r\ng',NULL),(23,NULL,1,'Надо починять принтир!!!!!! Нихрена не работаеть!!!!!! ПАМАГИТЯ!!!!!!!!!!',NULL),(24,NULL,1,'AWDGAERGASDRF',NULL),(29,NULL,1,'Нихуя не работает',NULL),(47,NULL,1,'sfghsdfghedfghdfg',NULL);
+INSERT INTO `task` VALUES (2,'Коля',1,NULL,NULL),(19,NULL,1,'sdhfgsdfgh',NULL),(20,NULL,1,'fghrtyjdfbncvkmfguk',NULL),(21,NULL,1,'sdfgsd\r\nsdfgsdfhs\r\nggggggggggggggggg\r\nмммммммммммм\r\nрррррррррррррррррррррррррррррррррррррррр\r\nшшшшшшшшшшшшшшш\r\n',NULL),(22,NULL,1,'dsffdfffffffffffffffffffffffffffffff hhhhhhhhhhhhhhhhhhhhh\r\nsadfgasdlkfglsadkfglsdkfghlksdfg\r\nakdsfgpsdlfkg;lsdkjfh;sjdf\'hbjadf;ja;dfkgja\r\najsdfaljkf;gjagjafdg\r\nagjaplsdjkg;aljdg]aosdjglad\r\ng',NULL),(23,NULL,1,'Надо починять принтир!!!!!! Нихрена не работаеть!!!!!! ПАМАГИТЯ!!!!!!!!!!',NULL),(24,NULL,1,'AWDGAERGASDRF',NULL),(29,NULL,1,'Нихуя не работает',NULL),(77,NULL,1,'00000000000000000',70);
 /*!40000 ALTER TABLE `task` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -166,7 +166,7 @@ CREATE TABLE `type_of_jobs` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -215,4 +215,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-02-28 16:15:31
+-- Dump completed on 2018-03-01 23:22:11

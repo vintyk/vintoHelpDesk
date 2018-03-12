@@ -16,6 +16,12 @@
         </div>
         <div class="medium-6 columns">
             <h1 th:text="#{admin.namePanel}">Панель администратора</h1>
+            <select th:field="*{typeOfJobId}">
+            <option th:each="privilege : ${privileges}"
+            th:value="${privilege.getId()}"
+            th:text="${privilege.getNamePrivilege()}">
+            </option>
+            </select><br>
         </div>
         <div class="medium-3 columns">
         </div>

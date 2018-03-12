@@ -9,7 +9,7 @@ public interface TaskService {
 
     Long saveTask(TaskDto taskDto);
 
-    List<Task> findAll();
+    List<TaskDto> findAll();
 
     Task findById(Long id);
 }
