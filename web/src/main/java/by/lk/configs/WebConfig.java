@@ -9,7 +9,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
  * Created by Vinty on 25.06.2017.
  */
 @Configuration
-@ComponentScan(basePackages = "by.lk.controller")
+@ComponentScan(basePackages = "by.lk")
 @Import({
         InternationalizationConfig.class,
         ThymeleafConfig.class,

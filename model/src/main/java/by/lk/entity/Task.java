@@ -30,4 +30,17 @@ public class Task extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "executor_id")
     private SystemUser executor;
+
+//    public static class Builder{
+//        private final String name;
+//        private final TypeOfJobs typeOfJobId;
+//        private final String text;
+//        private SystemUser systemUser;
+//        private SystemUser operator;
+//        private SystemUser executor;
+//
+//        public Builder() {
+//        }
+//    }
+
 }

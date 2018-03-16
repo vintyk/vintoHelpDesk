@@ -21,4 +21,11 @@ public class Branch extends BaseEntity {
     @Getter
     @Column(name = "name")
     private String name;
+
+    public static Branch newInstanceAllArgs(Long id, String name){
+        Branch branch = new Branch();
+        branch.setId(id);
+        branch.setName(name);
+        return branch;
+    }
 }

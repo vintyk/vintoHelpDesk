@@ -41,7 +41,9 @@ public class HelpDeskController {
     @ModelAttribute("taskDtoList")
     public List<TaskDto> taskDtoList() {
         List<TaskDto> taskList = new ArrayList<>();
-        final List<Task> allTasks = taskService.findAll();
+        List<TaskDto> allTasks = taskService.findAll();
+
+        //TODO
         return taskList;
     }
 
@@ -52,7 +54,7 @@ public class HelpDeskController {
 
     @ModelAttribute("typeOfJobs")
     public List<TypeOfJobs> typeOfJobs() {
-        return typeOfJobsRepository.findAll();
+        return (List<TypeOfJobs>) typeOfJobsRepository.findAll();
     }
 
     @GetMapping(path = "/HelpDesk")
