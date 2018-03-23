@@ -8,7 +8,7 @@ import lombok.ToString;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "task")
+//@Table(name = "task")
 @ToString
 @NoArgsConstructor
 @Setter
@@ -24,4 +24,23 @@ public class Task extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "system_user_id")
     private SystemUser systemUser;
+    @ManyToOne
+    @JoinColumn(name = "operator_id")
+    private SystemUser operator;
+    @ManyToOne
+    @JoinColumn(name = "executor_id")
+    private SystemUser executor;
+
+//    public static class Builder{
+//        private final String name;
+//        private final TypeOfJobs typeOfJobId;
+//        private final String text;
+//        private SystemUser systemUser;
+//        private SystemUser operator;
+//        private SystemUser executor;
+//
+//        public Builder() {
+//        }
+//    }
+
 }

@@ -9,7 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 /**
  * Created by SystemUser on 20.06.2017.
@@ -42,8 +46,25 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public List<Task> findAll() {
-        return null;
+    public List<TaskDto> findAll() {
+        List<Task> taskList = new ArrayList<>();
+        List<Task> all = (List<Task>) taskRepository.findAll();
+//        while (all.iterator().hasNext()){
+//            taskList.add(all.iterator().next());
+//        }
+        return new ArrayList<>(taskList
+                      .stream()
+                      .map(task -> new TaskDto(
+                              task.getId(),
+                              task.getName(),
+                              task.getText(),
+                              task.getTypeOfJobId().getId(),
+//                              task.getTypeOfJobId().getName(),
+                              task.getSystemUser().getId(),
+                              task.getOperator().getId(),
+                              task.getExecutor().getId()
+                      ))
+                      .collect(Collectors.toList()));
     }
 
     @Override

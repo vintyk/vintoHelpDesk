@@ -2,6 +2,7 @@ package by.lk.controller;
 
 import by.lk.dto.TaskDto;
 import by.lk.entity.SystemUser;
+import by.lk.entity.Task;
 import by.lk.entity.TypeOfJobs;
 import by.lk.repository.TypeOfJobsRepository;
 import by.lk.services.TaskService;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -36,6 +38,15 @@ public class HelpDeskController {
         this.userService = userService;
     }
 
+    @ModelAttribute("taskDtoList")
+    public List<TaskDto> taskDtoList() {
+        List<TaskDto> taskList = new ArrayList<>();
+        List<TaskDto> allTasks = taskService.findAll();
+
+        //TODO
+        return taskList;
+    }
+
     @ModelAttribute("taskDto")
     public TaskDto taskDto() {
         return new TaskDto();
@@ -43,7 +54,7 @@ public class HelpDeskController {
 
     @ModelAttribute("typeOfJobs")
     public List<TypeOfJobs> typeOfJobs() {
-        return typeOfJobsRepository.findAll();
+        return (List<TypeOfJobs>) typeOfJobsRepository.findAll();
     }
 
     @GetMapping(path = "/HelpDesk")
@@ -67,13 +78,9 @@ public class HelpDeskController {
 
     @PostMapping(path = "/HelpDesk")
     public String taskDto(TaskDto taskDtoFromView, Model model, HttpSession httpSession) {
-        TaskDto taskDtoForBd = new TaskDto();
-        taskDtoForBd.setName(taskDtoFromView.getName());
-        taskDtoForBd.setTypeOfJobId(1L);
-        taskDtoForBd.setText(taskDtoFromView.getText());
-        taskDtoForBd.setSystemUser((Long) httpSession.getAttribute("httpUserId"));
-        System.out.println(httpSession.getAttribute("httpUserId"));
-        taskService.saveTask(taskDtoForBd);
+        taskDtoFromView.setTypeOfJobId(1L);
+        taskDtoFromView.setSystemUser((Long) httpSession.getAttribute("httpUserId"));
+        taskService.saveTask(taskDtoFromView);
         model.addAttribute("systemUsername", httpSession.getAttribute("httpEmail"));
         model.addAttribute("userAuthority", httpSession.getAttribute("httpUserAuthority"));
         return "HelpDesk";

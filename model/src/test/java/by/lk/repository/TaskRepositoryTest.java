@@ -44,8 +44,9 @@ public class TaskRepositoryTest extends CommonTest {
         task.setName("Виталий");
         task.setTypeOfJobId(typeOfJobs);
         task.setText("Это заявка в свободной форме.");
-
         task.setSystemUser(systemUser);
+        task.setOperator(systemUser);
+        task.setExecutor(systemUser);
         taskId = taskRepository.save(task);
 
         Task myTask = taskRepository.findOne(taskId.getId());
@@ -59,7 +60,6 @@ public class TaskRepositoryTest extends CommonTest {
         TypeOfJobs typeOfJobs = new TypeOfJobs();
         typeOfJobs.setId(1L);
         typeOfJobs.setName("Наладка");
-
 
         Task task = new Task();
         task.setName(NAME);
