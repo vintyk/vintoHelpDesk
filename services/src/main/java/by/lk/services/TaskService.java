@@ -12,4 +12,6 @@ public interface TaskService {
     List<TaskDto> findAll();
 
     Task findById(Long id);
+
+    List<TaskDto> findBySystemUserId(Long id);
 }

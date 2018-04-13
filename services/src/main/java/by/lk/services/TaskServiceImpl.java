@@ -47,8 +47,8 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public List<TaskDto> findAll() {
-        List<Task> taskList = new ArrayList<>();
-        List<Task> all = (List<Task>) taskRepository.findAll();
+//        List<Task> taskList = new ArrayList<>();
+        List<Task> taskList = (List<Task>) taskRepository.findAll();
 //        while (all.iterator().hasNext()){
 //            taskList.add(all.iterator().next());
 //        }
@@ -60,9 +60,10 @@ public class TaskServiceImpl implements TaskService {
                               task.getText(),
                               task.getTypeOfJobId().getId(),
 //                              task.getTypeOfJobId().getName(),
-                              task.getSystemUser().getId(),
-                              task.getOperator().getId(),
-                              task.getExecutor().getId()
+                              task.getSystemUser().getId()
+//                              ,
+//                              task.getOperator().getId(),
+//                              task.getExecutor().getId()
                       ))
                       .collect(Collectors.toList()));
     }
@@ -70,5 +71,20 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public Task findById(Long id) {
         return null;
+    }
+
+    @Override
+    public List<TaskDto> findBySystemUserId(Long id) {
+        List<Task> taskList = (List<Task>) taskRepository.findAllBySystemUserId(id);
+        return new ArrayList<>(taskList
+                .stream()
+                .map(task -> new TaskDto(
+                        task.getId(),
+                        task.getName(),
+                        task.getText(),
+                        task.getTypeOfJobId().getId(),
+                        task.getSystemUser().getId()
+                ))
+                .collect(Collectors.toList()));
     }
 }

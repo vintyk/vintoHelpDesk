@@ -2,7 +2,6 @@ package by.lk.controller;
 
 import by.lk.dto.TaskDto;
 import by.lk.entity.SystemUser;
-import by.lk.entity.Task;
 import by.lk.entity.TypeOfJobs;
 import by.lk.repository.TypeOfJobsRepository;
 import by.lk.services.TaskService;
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -30,21 +28,13 @@ public class HelpDeskController {
     private final TaskService taskService;
     private final TypeOfJobsRepository typeOfJobsRepository;
     private final UserService userService;
+    private Long userId;
 
     @Autowired
     public HelpDeskController(TaskService taskService, TypeOfJobsRepository typeOfJobsRepository, UserService userService) {
         this.taskService = taskService;
         this.typeOfJobsRepository = typeOfJobsRepository;
         this.userService = userService;
-    }
-
-    @ModelAttribute("taskDtoList")
-    public List<TaskDto> taskDtoList() {
-        List<TaskDto> taskList = new ArrayList<>();
-        List<TaskDto> allTasks = taskService.findAll();
-
-        //TODO
-        return taskList;
     }
 
     @ModelAttribute("taskDto")
@@ -63,6 +53,11 @@ public class HelpDeskController {
         String systemUserEmail = user.getUsername();
         model.addAttribute("systemUsername", systemUserEmail);
         SystemUser systemUser = userService.findByEmail(systemUserEmail);
+
+        userId = systemUser.getId();
+        List<TaskDto> allTasks = taskService.findBySystemUserId(userId);
+        model.addAttribute("taskDtoList", allTasks);
+
         httpSession.setAttribute("httpUserId", systemUser.getId());
         httpSession.setAttribute("httpBranch", systemUser.getBranch());
         httpSession.setAttribute("httpSubdivision", systemUser.getSubdivision());
@@ -83,6 +78,6 @@ public class HelpDeskController {
         taskService.saveTask(taskDtoFromView);
         model.addAttribute("systemUsername", httpSession.getAttribute("httpEmail"));
         model.addAttribute("userAuthority", httpSession.getAttribute("httpUserAuthority"));
-        return "HelpDesk";
+        return "redirect:/HelpDesk";
     }
 }

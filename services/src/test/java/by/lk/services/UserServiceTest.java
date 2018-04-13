@@ -33,7 +33,6 @@ public class UserServiceTest extends CommonTest {
         SystemUser userId = userService.findById(id);
         Assert.assertEquals("Сохранение пользователя в БД через Dto: ", id, userId.getId());
     }
-
     @Test
     @Rollback
     public void findByEmailTest() {

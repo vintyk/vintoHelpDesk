@@ -8,7 +8,6 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
 
 import java.util.HashSet;
 import java.util.Set;

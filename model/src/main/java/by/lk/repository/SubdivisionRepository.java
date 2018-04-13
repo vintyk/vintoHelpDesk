@@ -1,6 +1,5 @@
 package by.lk.repository;
 
-import by.lk.entity.Branch;
 import by.lk.entity.Subdivision;
 import org.springframework.data.repository.CrudRepository;
 

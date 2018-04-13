@@ -36,4 +36,18 @@ public class TaskDto extends BaseEntity {
         this.operatorId = operatorId;
         this.executorId = executorId;
     }
+    public TaskDto(Long id,
+                   String name,
+                   String text,
+                   Long typeOfJobId,
+//                   String nameTypeOfJobId,
+                   Long systemUser
+                   ) {
+        super(id);
+        this.name = name;
+        this.text = text;
+        this.typeOfJobId = typeOfJobId;
+//        this.nameTypeOfJobId = nameTypeOfJobId;
+        this.systemUser = systemUser;
+    }
 }
