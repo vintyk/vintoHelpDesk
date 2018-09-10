@@ -13,7 +13,7 @@ import javax.persistence.Table;
  * Created by Vinty on 21.04.2017.
  */
 @Entity
-@Table(name = "branch")
+@Table(name = "branches")
 @ToString
 @NoArgsConstructor
 public class Branch extends BaseEntity {

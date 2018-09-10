@@ -3,16 +3,13 @@ package by.lk.services;
 import by.lk.dto.TaskDto;
 import by.lk.entity.SystemUser;
 import by.lk.entity.Task;
-import by.lk.entity.TypeOfJobs;
 import by.lk.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 /**

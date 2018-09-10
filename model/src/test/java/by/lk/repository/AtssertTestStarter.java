@@ -6,7 +6,7 @@ import org.junit.runners.Suite;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
         SystemUserRepositoryTest.class,
-        TaskRepositoryTest.class,
-        TypeOfJobsTest.class})
+        TaskRepositoryTest.class
+        })
 public class AtssertTestStarter {
 }

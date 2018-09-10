@@ -1,5 +1,6 @@
 package by.lk.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,14 +11,17 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "type_of_jobs")
-@ToString
-@NoArgsConstructor
+@Table(name = "status")
 @Getter
 @Setter
-public class TypeOfJobs extends BaseEntity {
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+public class Status extends BaseEntity{
     @Column(name = "name")
     private String name;
+
+    public Status(Long id) {
+        this.id = id;
+    }
 }
-
-

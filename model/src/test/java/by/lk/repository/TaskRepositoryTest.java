@@ -24,9 +24,6 @@ public class TaskRepositoryTest extends CommonTest {
 
     @Test
     public void saveTest() {
-        TypeOfJobs typeOfJobs = new TypeOfJobs();
-        typeOfJobs.setId(1L);
-
         Set<Privilege> privileges = new HashSet<>();
         Privilege privilege = new Privilege();
         privilege.setId(1L);
@@ -42,11 +39,11 @@ public class TaskRepositoryTest extends CommonTest {
 
         Task task = new Task();
         task.setName("Виталий");
-        task.setTypeOfJobId(typeOfJobs);
         task.setText("Это заявка в свободной форме.");
         task.setSystemUser(systemUser);
         task.setOperator(systemUser);
         task.setExecutor(systemUser);
+        task.setStatus(new Status(1L));
         taskId = taskRepository.save(task);
 
         Task myTask = taskRepository.findOne(taskId.getId());
@@ -56,20 +53,16 @@ public class TaskRepositoryTest extends CommonTest {
 
     @Test
     public void findByNameTest() {
-        String NAME = "Виталий";
-        TypeOfJobs typeOfJobs = new TypeOfJobs();
-        typeOfJobs.setId(1L);
-        typeOfJobs.setName("Наладка");
-
+        String name = "Виталий";
         Task task = new Task();
-        task.setName(NAME);
-        task.setTypeOfJobId(typeOfJobs);
+        task.setName(name);
         task.setText("Это заявка в свободной форме 2.");
+        task.setStatus(new Status(1L));
 
         taskId = taskRepository.save(task);
 
         List<Task> actual = Arrays.asList(task);
-        List<Task> expected = taskRepository.findByName(NAME);
+        List<Task> expected = taskRepository.findByName(name);
         Assert.assertEquals(actual.get(0).getName(), expected.get(0).getName());
     }
 

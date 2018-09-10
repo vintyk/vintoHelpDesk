@@ -13,7 +13,7 @@ import javax.persistence.Table;
  * Created by Vinty on 21.04.2017.
  */
 @Entity
-@Table(name = "subdivision")
+@Table(name = "subdivisions")
 @ToString
 @NoArgsConstructor
 public class Subdivision extends BaseEntity {

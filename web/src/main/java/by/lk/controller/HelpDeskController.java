@@ -2,8 +2,6 @@ package by.lk.controller;
 
 import by.lk.dto.TaskDto;
 import by.lk.entity.SystemUser;
-import by.lk.entity.TypeOfJobs;
-import by.lk.repository.TypeOfJobsRepository;
 import by.lk.services.TaskService;
 import by.lk.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
