@@ -25,7 +25,6 @@ public class TaskServiceTest extends CommonTest {
         TaskDto taskDto = new TaskDto();
         taskDto.setName("Подсоединить картридж");
         taskDto.setText("Закончился старый картридж. Надо замена.");
-        taskDto.setTypeOfJobId(1L);
         id = taskService.saveTask(taskDto);
         taskRepository.delete(id);
     }

@@ -24,25 +24,18 @@ import java.util.List;
 @Controller
 public class HelpDeskController {
     private final TaskService taskService;
-    private final TypeOfJobsRepository typeOfJobsRepository;
     private final UserService userService;
     private Long userId;
 
     @Autowired
-    public HelpDeskController(TaskService taskService, TypeOfJobsRepository typeOfJobsRepository, UserService userService) {
+    public HelpDeskController(TaskService taskService, UserService userService) {
         this.taskService = taskService;
-        this.typeOfJobsRepository = typeOfJobsRepository;
         this.userService = userService;
     }
 
     @ModelAttribute("taskDto")
     public TaskDto taskDto() {
         return new TaskDto();
-    }
-
-    @ModelAttribute("typeOfJobs")
-    public List<TypeOfJobs> typeOfJobs() {
-        return (List<TypeOfJobs>) typeOfJobsRepository.findAll();
     }
 
     @GetMapping(path = "/HelpDesk")
@@ -71,7 +64,6 @@ public class HelpDeskController {
 
     @PostMapping(path = "/HelpDesk")
     public String taskDto(TaskDto taskDtoFromView, Model model, HttpSession httpSession) {
-        taskDtoFromView.setTypeOfJobId(1L);
         taskDtoFromView.setSystemUser((Long) httpSession.getAttribute("httpUserId"));
         taskService.saveTask(taskDtoFromView);
         model.addAttribute("systemUsername", httpSession.getAttribute("httpEmail"));
