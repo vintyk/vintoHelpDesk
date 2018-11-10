@@ -1,0 +1,14 @@
+# Created by .ignore support plugin (hsz.mobi)
+.gitignore
+.idea/artifacts/
+.idea/checkstyle-idea.xml
+.idea/compiler.xml
+.idea/dataSources.local.xml
+.idea/vintoHelpDesk.iml
+.idea/workspace.xml
+model/model.iml
+model/target/
+model/test_service_log4j.log
+services/services.iml
+services/target/
+web/web.iml

@@ -9,4 +9,7 @@ import java.util.List;
 public interface BranchRepository extends CrudRepository<Branch, Long> {
 
     List<Branch> findAll();
+
+    List<Branch> findAllByNameContains(String nameBranche);
+
 }
