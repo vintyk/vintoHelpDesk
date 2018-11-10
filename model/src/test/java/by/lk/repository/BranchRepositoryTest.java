@@ -12,4 +12,10 @@ public class BranchRepositoryTest {
         boolean isTrue = true;
         Assert.assertTrue(isTrue);
     }
+
+    @Test
+    public void findAllByNameContains2() {
+        boolean isTrue = false;
+        Assert.assertTrue(!isTrue);
+    }
 }
